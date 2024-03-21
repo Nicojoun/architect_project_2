@@ -11,7 +11,6 @@
 
         // Création d’une balise dédiée à un projet
         const figureProjet = document.createElement("figure")
-        // figureProjet.dataset.id = projets[i].id
 
         // création des balises
         const imageProjet = document.createElement("img")

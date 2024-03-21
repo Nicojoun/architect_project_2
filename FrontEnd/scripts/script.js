@@ -4,9 +4,7 @@ const projets = await reponse.json();
 
 //affichage des projets en images
 function genererProjets(projets) {
-    for (let i = 0; i < projets.length; i++) {
-        const figure = projets[i]
-    
+    for (let i = 0; i < projets.length; i++) { 
         // Récupération de l'élément du DOM qui accueillera les projets
         const gallery = document.querySelector(".gallery")
     
@@ -15,11 +13,11 @@ function genererProjets(projets) {
     
         // création des balises
         const imageProjet = document.createElement("img")
-        imageProjet.src = figure.imageUrl
-        imageProjet.alt = figure.title
+        imageProjet.src = projets[i].imageUrl
+        imageProjet.alt = projets[i].title
     
         const titreProjet = document.createElement("figcaption")
-        titreProjet.innerText = figure.title
+        titreProjet.innerText = projets[i].title
     
         gallery.appendChild(figureProjet)
         figureProjet.appendChild(imageProjet)
@@ -29,17 +27,18 @@ function genererProjets(projets) {
 
 //affichage des filtres
 function genererFiltres(projets) {
-    for (let i = 0; i < projets.length; i++) {
-        const filtreProjet = projets[i]
-
+    const categorie = projets.map(projet => projet.category);
+    for  (let i = projets.length - 1; i >= 0; i--) {
         // Récupération de l'élément du DOM qui accueillera les filtres
         const filtre = document.querySelector(".filtre")
 
         // Création d’un bouton dédié à un filtre
         const boutonFiltre = document.createElement("button")
-        boutonFiltre.innerHTML = filtreProjet.category.name
+        boutonFiltre.innerHTML = categorie[i].name
 
-        filtre.appendChild(boutonFiltre)
+        if (categorie[i].id !== categorie[i-1].id) {
+            filtre.appendChild(boutonFiltre)
+        }     
     }
 }
 

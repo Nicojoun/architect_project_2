@@ -2,6 +2,10 @@
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
 
+// Récupération des catégories depuis l'API
+const reponseCategories = await fetch('http://localhost:5678/api/categories');
+const categories = await reponseCategories.json();
+
 //affichage des projets en images
 function genererProjets(projets) {
     for (let i = 0; i < projets.length; i++) { 
@@ -26,25 +30,23 @@ function genererProjets(projets) {
 }
 
 //affichage des filtres
-function genererFiltres(projets) {
-    const categorie = projets.map(projet => projet.category);
-    for  (let i = projets.length - 1; i >= 0; i--) {
+function genererFiltres(categories) {
+    // for  (const categorie of categories ) {
+    for  (let i = 0; i < categories.length; i++ ) {
         // Récupération de l'élément du DOM qui accueillera les filtres
         const filtre = document.querySelector(".filtre")
 
         // Création d’un bouton dédié à un filtre
         const boutonFiltre = document.createElement("button")
-        boutonFiltre.innerHTML = categorie[i].name
+        boutonFiltre.innerText = categories[i].name   
 
-        if (categorie[i].id !== categorie[i-1].id) {
-            filtre.appendChild(boutonFiltre)
-        }     
+        filtre.appendChild(boutonFiltre)
     }
 }
 
 //appel des fonctions
 genererProjets(projets)
-genererFiltres(projets)
+genererFiltres(categories)
 
 
 

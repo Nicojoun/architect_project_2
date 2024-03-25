@@ -31,6 +31,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 }
+
 ol, ul {
 	list-style: none;
 }
@@ -126,8 +127,6 @@ li:hover {
 	margin-bottom: 1em;
 }
 
-/* plus bas : code rajouté */
-
 .filtre {
 	display: flex;
 	justify-content: center;
@@ -149,8 +148,6 @@ li:hover {
 	color: white;
 }
 
-/* plus haut : code rajouté */
-
 .gallery {
 	width: 100%;
 	display: grid;
@@ -163,34 +160,34 @@ li:hover {
 	width: 100%;
 
 }
-#contact {
+#contact, #connexion {
 	width: 50%;
 margin: auto;
 }
-#contact > * {
+#contact > *,  #connexion > * {
 	text-align: center;
 
 }
-#contact h2{
+#contact h2, #connexion h2{
 	margin-bottom: 20px;
 }
-#contact form {
+#contact form, #connexion form {
 	text-align: left;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
 }
 
-#contact input {
+#contact input, #connexion input {
 	height: 50px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
-#contact label {
+#contact label, #connexion label {
 	margin: 2em 0 1em 0;
 }
-#contact textarea {
+#contact textarea, #connexion textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
@@ -210,5 +207,13 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+#footerLogin {
+	/* display: flex;
+	flex: 1;
+	flex-direction: column;
+	justify-content: flex-end; */
+	margin-top: 30%;
 }
 

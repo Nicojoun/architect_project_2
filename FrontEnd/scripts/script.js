@@ -6,9 +6,8 @@ const projets = await reponse.json();
 const reponseCategories = await fetch('http://localhost:5678/api/categories');
 const categories = await reponseCategories.json();
 
-//affichage des projets en images
 function genererProjets(projets) {
-    for (let i = 0; i < projets.length; i++) { 
+    for (const projet of projets) { 
         // Récupération de l'élément du DOM qui accueillera les projets
         const gallery = document.querySelector(".gallery")
     
@@ -17,11 +16,11 @@ function genererProjets(projets) {
     
         // création des balises
         const imageProjet = document.createElement("img")
-        imageProjet.src = projets[i].imageUrl
-        imageProjet.alt = projets[i].title
+        imageProjet.src = projet.imageUrl
+        imageProjet.alt = projet.title
     
         const titreProjet = document.createElement("figcaption")
-        titreProjet.innerText = projets[i].title
+        titreProjet.innerText = projet.title
     
         gallery.appendChild(figureProjet)
         figureProjet.appendChild(imageProjet)
@@ -31,17 +30,37 @@ function genererProjets(projets) {
 
 //affichage des filtres
 function genererFiltres(categories) {
-    // for  (const categorie of categories ) {
-    for  (let i = 0; i < categories.length; i++ ) {
+    for  (const categorie of categories) {
         // Récupération de l'élément du DOM qui accueillera les filtres
         const filtre = document.querySelector(".filtre")
 
         // Création d’un bouton dédié à un filtre
         const boutonFiltre = document.createElement("button")
-        boutonFiltre.innerText = categories[i].name   
+        boutonFiltre.innerText = categorie.name
+        boutonFiltre.value = categorie.id   
 
         filtre.appendChild(boutonFiltre)
-    }
+
+        // Tri des projets lorsqu'on clique sur les boutons des filtres
+        boutonFiltre.addEventListener("click", (event) => {
+            console.log(event.target.innerText + ": " + event.target.value)
+            const categoriesFiltrees = projets.filter(function (projet) {
+                return projet.category.name === boutonFiltre.innerText
+            })
+            console.log(categoriesFiltrees);
+            document.querySelector(".gallery").innerHTML = "";
+            genererProjets(categoriesFiltrees)
+            
+        })
+
+}
+
+//Réinitilisation des filtres et affichage de tous les projets
+const boutonTous = document.getElementById("tous")
+boutonTous.addEventListener("click", () => {
+    document.querySelector(".gallery").innerHTML = "";
+    genererProjets(projets)
+})
 }
 
 //appel des fonctions

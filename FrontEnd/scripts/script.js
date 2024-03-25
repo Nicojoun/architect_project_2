@@ -37,7 +37,8 @@ function genererFiltres(categories) {
         // Création d’un bouton dédié à un filtre
         const boutonFiltre = document.createElement("button")
         boutonFiltre.innerText = categorie.name
-        boutonFiltre.value = categorie.id   
+        boutonFiltre.value = categorie.id
+        boutonFiltre.className = "boutonsFiltres"   
 
         filtre.appendChild(boutonFiltre)
 

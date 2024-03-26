@@ -1,3 +1,5 @@
+import { connexion } from "./login.js";
+
 // Récupération des projets de l’architecte depuis l'API
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
@@ -43,12 +45,10 @@ function genererFiltres(categories) {
         filtre.appendChild(boutonFiltre)
 
         // Tri des projets lorsqu'on clique sur les boutons des filtres
-        boutonFiltre.addEventListener("click", (event) => {
-            console.log(event.target.innerText + ": " + event.target.value)
+        boutonFiltre.addEventListener("click", () => {
             const categoriesFiltrees = projets.filter(function (projet) {
                 return projet.category.name === boutonFiltre.innerText
             })
-            console.log(categoriesFiltrees);
             document.querySelector(".gallery").innerHTML = "";
             genererProjets(categoriesFiltrees)
             
@@ -61,24 +61,6 @@ function genererFiltres(categories) {
         genererProjets(projets)
     })
 }
-
-//connexion
-const formulaireConnexion = document.querySelector("#connexion form")
-formulaireConnexion.addEventListener("submit", (event) => {
-    // Création de l’objet de la connexion
-    const login = {
-        email: event.target.querySelector("[name=email]").value,
-        password: event.target.querySelector("[name=password]").value,
-    }
-    // Création de la charge utile au format JSON
-    const chargeUtile = JSON.stringify(login)
-    // Appel de la fonction fetch avec toutes les informations nécessaires
-    fetch("http://localhost:5678/api/users/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: chargeUtile
-    });
-})
 
 //appel des fonctions
 genererProjets(projets)

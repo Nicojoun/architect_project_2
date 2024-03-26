@@ -53,20 +53,33 @@ function genererFiltres(categories) {
             genererProjets(categoriesFiltrees)
             
         })
-
+}
+    //Réinitilisation des filtres et affichage de tous les projets
+    const boutonTous = document.getElementById("tous")
+    boutonTous.addEventListener("click", () => {
+        document.querySelector(".gallery").innerHTML = "";
+        genererProjets(projets)
+    })
 }
 
-//Réinitilisation des filtres et affichage de tous les projets
-const boutonTous = document.getElementById("tous")
-boutonTous.addEventListener("click", () => {
-    document.querySelector(".gallery").innerHTML = "";
-    genererProjets(projets)
+//connexion
+const formulaireConnexion = document.querySelector("#connexion form")
+formulaireConnexion.addEventListener("submit", (event) => {
+    // Création de l’objet de la connexion
+    const login = {
+        email: event.target.querySelector("[name=email]").value,
+        password: event.target.querySelector("[name=password]").value,
+    }
+    // Création de la charge utile au format JSON
+    const chargeUtile = JSON.stringify(login)
+    // Appel de la fonction fetch avec toutes les informations nécessaires
+    fetch("http://localhost:5678/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: chargeUtile
+    });
 })
-}
 
 //appel des fonctions
 genererProjets(projets)
 genererFiltres(categories)
-
-
-

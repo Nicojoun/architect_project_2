@@ -8,6 +8,11 @@ const projets = await reponse.json();
 const reponseCategories = await fetch('http://localhost:5678/api/categories');
 const categories = await reponseCategories.json();
 
+let connecte = window.sessionStorage.getItem("connexion")
+if (connecte !== null) {
+    console.log("bravo : connexion réussie !!!!!!!!")
+} 
+
 function genererProjets(projets) {
     for (const projet of projets) { 
         // Récupération de l'élément du DOM qui accueillera les projets

@@ -15,7 +15,7 @@ export function connexion() {
                 // Création de la charge utile au format JSON
                 const chargeUtile = JSON.stringify(login)
                 // Appel de la fonction fetch avec toutes les informations nécessaires
-                fetch("http://localhost:5678/api/users/login", {
+                const verifLogin = fetch("http://localhost:5678/api/users/login", {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: chargeUtile
@@ -24,6 +24,8 @@ export function connexion() {
                     //connexion réussie
                     if (response.status === 200) {
                         spanMessageErreur.innerHTML = ""
+                        const connexionReussie = JSON.stringify(verifLogin)
+                        window.sessionStorage.setItem("connexion", connexionReussie)
                         document.location.href="index.html"; 
                     } else  {
                         //connexion échouée

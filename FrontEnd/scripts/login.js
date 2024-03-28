@@ -21,11 +21,12 @@ export function connexion() {
                     body: chargeUtile
                 })
                 .then((response) => {
-                    console.log(response.status)
+                    //connexion réussie
                     if (response.status === 200) {
-                        console.log("bravo !!!!!!!!!")
                         spanMessageErreur.innerHTML = ""
+                        document.location.href="index.html"; 
                     } else  {
+                        //connexion échouée
                         spanMessageErreur.innerHTML = ""
                         formulaireConnexion.appendChild(spanMessageErreur)
                         const messageErreur = document.createElement("p")

@@ -14,7 +14,7 @@ formulaireConnexion.addEventListener("submit", (event) => {
     // Création de la charge utile au format JSON
     const chargeUtile = JSON.stringify(login)
     // Appel de la fonction fetch avec toutes les informations nécessaires
-    const verifLogin = fetch("http://localhost:5678/api/users/login", {
+    fetch("http://localhost:5678/api/users/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: chargeUtile
@@ -23,8 +23,7 @@ formulaireConnexion.addEventListener("submit", (event) => {
         spanMessageErreur.innerHTML = ""
         //connexion réussie
         if (response.status === 200) {
-            const connexionReussie = JSON.stringify(verifLogin)
-            window.localStorage.setItem("connexion", connexionReussie)
+            window.localStorage.setItem("connexion", response.json)
             document.location.href="index.html"; 
         } else  {
             //connexion échouée

@@ -1,5 +1,3 @@
-import { connexion } from "./login.js";
-
 // Récupération des projets de l’architecte depuis l'API
 const reponse = await fetch('http://localhost:5678/api/works');
 const projets = await reponse.json();
@@ -9,7 +7,7 @@ const reponseCategories = await fetch('http://localhost:5678/api/categories');
 const categories = await reponseCategories.json();
 
 const loginLogout = document.getElementById("loginLogout")
-let connecte = window.sessionStorage.getItem("connexion")
+let connecte = window.localStorage.getItem("connexion")
 if (connecte !== null) {
     console.log("bravo : connexion réussie !!!!!!!!")
     loginLogout.innerText = "logout"

@@ -54,6 +54,17 @@ body {
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 }
+
+.edition {
+	display: flex;
+	justify-content: center;
+	gap: 10px;
+	background-color: #000;
+	color: white;
+	font-family: 'Work Sans' ;
+	padding: 20px 20px;
+}
+
 header {
 	display: flex;
 	justify-content: space-between;
@@ -85,6 +96,7 @@ h2{
 	font-size: 30px;
 	color: #1D6154
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
@@ -99,6 +111,7 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -123,8 +136,20 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 #portfolio h2 {
-	text-align: center;
+	/* text-align: center; */
 	margin-bottom: 1em;
+	display: flex;
+	justify-content: center;
+	gap: 30px;
+}
+
+#portfolio h2 div {
+	font-family: 'Work Sans';
+	color: #000;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 10px;
 }
 
 .filtre {

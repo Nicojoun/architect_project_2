@@ -7,10 +7,22 @@ const reponseCategories = await fetch('http://localhost:5678/api/categories');
 const categories = await reponseCategories.json();
 
 const loginLogout = document.getElementById("loginLogout")
+const mesProjets = document.querySelector("#portfolio h2")
+const edition = document.querySelector(".edition")
+
+//modification de la page si la connection est réussie
 let connecte = window.localStorage.getItem("connexion")
 if (connecte !== null) {
-    console.log("bravo : connexion réussie !!!!!!!!")
+    //déconnexion
     loginLogout.innerText = "logout"
+    loginLogout.addEventListener("click", () => {
+        window.localStorage.removeItem("connexion")
+    }) 
+
+    const modifierProjet = document.createElement("div")
+    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>modifier</p>`
+    mesProjets.appendChild(modifierProjet)
+    edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
 } 
 
 function genererProjets(projets) {

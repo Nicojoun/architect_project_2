@@ -20,7 +20,7 @@ if (connecte !== null) {
     }) 
 
     const modifierProjet = document.createElement("div")
-    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>modifier</p>`
+    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" class="js-modal">Modifier</a>`
     mesProjets.appendChild(modifierProjet)
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
 } 
@@ -82,3 +82,74 @@ function genererFiltres(categories) {
 //appel des fonctions
 genererProjets(projets)
 genererFiltres(categories)
+
+
+
+
+
+
+
+//fenêtre modale
+
+let modal = null
+
+//ouverture de la modale
+const openModal = function (e) {
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute("href"))
+    target.style.display = null
+    target.removeAttribute("aria-hidden")
+    target.setAttribute("aria-modal", "true")
+    modal = target
+    modal.addEventListener("click", closeModal)
+    modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
+    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+}
+
+//fermeture de la modale
+const closeModal = function (e) {
+    if (modal === null) return
+    e.preventDefault()
+    modal.style.display = "none"
+    modal.setAttribute("aria-hidden", "true")
+    modal.removeAttribute("aria-modal")
+    modal.removeEventListener("click", closeModal)
+    modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
+    modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
+    modal = null
+}
+
+//cliquer à l'intérieur de la modale ne la ferme pas
+const stopPropagation = function (e) {
+    e.stopPropagation()
+}
+
+//Génération des images des projets dans la modale
+const genererImages = function (images) {
+    for (const image of images) { 
+        // Récupération de l'élément du DOM qui accueillera les projets
+        const imagesProjets = document.querySelector(".imagesProjets")
+    
+        //création des balises
+        const imageMiniature = document.createElement("img")
+
+        imageMiniature.src = image.imageUrl
+        imageMiniature.alt = image.title
+
+        imagesProjets.appendChild(imageMiniature)
+    }
+}
+
+// appel des fonctions de la modale
+document.querySelectorAll(".js-modal").forEach(a => {
+    a.addEventListener("click", openModal)
+    genererImages(projets)
+})
+
+//fermeture de la modale quand on appuie sur echap
+window.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" || e.key === "Esc" ) {
+        closeModal(e)
+    }
+} )
+

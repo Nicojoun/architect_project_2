@@ -48,6 +48,77 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+
+/* fenetre modale début */
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+* { box-sizing: border-box; }
+
+.modal {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.modal-wrapper {
+    overflow: auto;
+    width: 630px;
+	height: 680px;
+    max-width: calc(100vw - 20px);
+    max-height: calc(100vw - 20px);
+    padding: 20px;
+    background-color: white;
+	/* display: flex;
+	flex-direction: column; */
+}
+
+.js-modal-close {
+	display: flex;
+	justify-content: end;
+}
+
+#titlemodal {
+	display: flex;
+	align-items: center;
+	font-family: 'Work Sans' ;
+	color: #000;
+}
+
+#ajouterPhoto {
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	background-color: #1D6154;
+	padding: 5px 30px;
+	font-family: 'Syne';
+	color: white;
+	margin-top: 7%;
+	margin-left: 33%;
+}
+
+.imagesProjets {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 10% 15% ;
+	border-bottom: 1px solid #B3B3B3
+}
+
+.imagesProjets img {
+	padding: 15px 3px;
+	width: 77px;
+	object-fit: cover;
+}
+
+/* fenetre modale fin */
+
 body {
 	max-width: 1140px;
 	margin:auto;

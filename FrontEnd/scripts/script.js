@@ -129,14 +129,35 @@ const genererImages = function (images) {
     for (const image of images) { 
         // Récupération de l'élément du DOM qui accueillera les projets
         const imagesProjets = document.querySelector(".imagesProjets")
-    
-        //création des balises
-        const imageMiniature = document.createElement("img")
 
+        // Création d’une balise dédiée à un projet
+        const figureImage = document.createElement("figure")
+    
+        //création des balises des images
+        const imageMiniature = document.createElement("img")
         imageMiniature.src = image.imageUrl
         imageMiniature.alt = image.title
 
-        imagesProjets.appendChild(imageMiniature)
+        //création des balises des boutons
+        const boutonSuppression = document.createElement("button")
+        boutonSuppression.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`
+        boutonSuppression.id = image.id
+
+        imagesProjets.appendChild(figureImage)
+        figureImage.appendChild(imageMiniature)
+        figureImage.appendChild(boutonSuppression)
+
+        // suppressionProjet(projets)
+        const url = `http://localhost:5678/api/works/${image.id}`
+        boutonSuppression.addEventListener("click", () => {
+                fetch(url, {
+                    method: "DELETE",
+                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjIzMDIxNSwiZXhwIjoxNzEyMzE2NjE1fQ.5sl8836JHncSdB9SBEG5LpROgscYP5CPscbDdU6BkFk" },
+                })
+                figureImage.innerHTML=""
+                document.querySelector(".gallery figure").innerHTML=""
+        })
+
     }
 }
 
@@ -152,4 +173,6 @@ window.addEventListener("keydown", (e) => {
         closeModal(e)
     }
 } )
+
+
 

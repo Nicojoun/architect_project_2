@@ -77,8 +77,7 @@ body, html {
     max-height: calc(100vw - 20px);
     padding: 20px;
     background-color: white;
-	/* display: flex;
-	flex-direction: column; */
+	border-radius: 10px;
 }
 
 .js-modal-close {
@@ -105,16 +104,33 @@ body, html {
 }
 
 .imagesProjets {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 10% 15% ;
-	border-bottom: 1px solid #B3B3B3
+	padding: 10% 10% ;
+	border-bottom: 1px solid #B3B3B3 ;
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	grid-row-gap: 30px;
+}
+
+.imagesProjets figure {
+	padding: 15px 3px;
+	width: 80px;
+	height: 104px;
 }
 
 .imagesProjets img {
-	padding: 15px 3px;
 	width: 77px;
 	object-fit: cover;
+	z-index: 1;
+}
+.imagesProjets button {
+	z-index: 2;
+	position: relative;
+	bottom: 100px ;
+	left: 55px;
+	background-color: #000;
+	padding: 2px;
+	border-radius: 2px;
 }
 
 /* fenetre modale fin */

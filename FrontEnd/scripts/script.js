@@ -159,7 +159,7 @@ const genererImages = function (images) {
         boutonSuppression.addEventListener("click", () => {
                 fetch(url, {
                     method: "DELETE",
-                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjIzMDIxNSwiZXhwIjoxNzEyMzE2NjE1fQ.5sl8836JHncSdB9SBEG5LpROgscYP5CPscbDdU6BkFk" },
+                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjMxOTk0NCwiZXhwIjoxNzEyNDA2MzQ0fQ.82PkoopJgsAeYJArIYYL4sIIfSLFBPa20bV0DYa0RhM" },
                 })
                 figureImage.innerHTML=""
                 document.querySelector(".gallery figure").innerHTML=""
@@ -172,12 +172,21 @@ const ajouterPhoto = function () {
     const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
     const imagesProjets = document.querySelector(".imagesProjets")
     const titlemodal = document.getElementById("titlemodal")
+    const content = document.querySelector(".content")
 
     boutonAjouterPhoto.addEventListener("click", () => {
-        imagesProjets.innerHTML = ""
+        content.innerHTML = ""
         titlemodal.innerText = "Ajout photo"
         boutonAjouterPhoto.innerText = "Valider"
         boutonAjouterPhoto.style.backgroundColor = "#A7A7A7"
+        content.innerHTML = `
+            <form action="#" method="post">
+                <label for="titre">Titre</label> </br>			
+                <input type="text" name="titre" id="titre"> </br>
+                <label for="categorie">Categorie</label> </br>
+                <input type="select" name="categorie" id="categorie">
+            </form >
+        `
     })
 }
 
@@ -194,6 +203,3 @@ window.addEventListener("keydown", (e) => {
         closeModal(e)
     }
 } )
-
-
-

@@ -103,9 +103,12 @@ body, html {
 	margin-left: 33%;
 }
 
+.content {
+	border-bottom: 1px solid #B3B3B3 ;
+}
+
 .imagesProjets {
 	padding: 10% 10% ;
-	border-bottom: 1px solid #B3B3B3 ;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
@@ -131,6 +134,14 @@ body, html {
 	background-color: #000;
 	padding: 2px;
 	border-radius: 2px;
+}
+
+#titre {
+	flex: 1;
+}
+
+#categorie {
+	flex: 1;
 }
 
 /* fenetre modale fin */

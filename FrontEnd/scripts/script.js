@@ -25,7 +25,7 @@ if (connecte !== null) {
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
 } 
 
-function genererProjets(projets) {
+const genererProjets = function (projets) {     
     for (const projet of projets) { 
         // Récupération de l'élément du DOM qui accueillera les projets
         const gallery = document.querySelector(".gallery")
@@ -48,7 +48,7 @@ function genererProjets(projets) {
 }
 
 //affichage des filtres
-function genererFiltres(categories) {
+const genererFiltres = function (categories) {     
     for  (const categorie of categories) {
         // Récupération de l'élément du DOM qui accueillera les filtres
         const filtre = document.querySelector(".filtre")
@@ -82,6 +82,13 @@ function genererFiltres(categories) {
 //appel des fonctions
 genererProjets(projets)
 genererFiltres(categories)
+
+
+
+
+
+
+
 
 
 
@@ -161,11 +168,25 @@ const genererImages = function (images) {
     }
 }
 
+const ajouterPhoto = function () {
+    const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
+    const imagesProjets = document.querySelector(".imagesProjets")
+    const titlemodal = document.getElementById("titlemodal")
+
+    boutonAjouterPhoto.addEventListener("click", () => {
+        imagesProjets.innerHTML = ""
+        titlemodal.innerText = "Ajout photo"
+        boutonAjouterPhoto.innerText = "Valider"
+        boutonAjouterPhoto.style.backgroundColor = "#A7A7A7"
+    })
+}
+
 // appel des fonctions de la modale
 document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal)
     genererImages(projets)
 })
+ajouterPhoto()
 
 //fermeture de la modale quand on appuie sur echap
 window.addEventListener("keydown", (e) => {

@@ -136,12 +136,58 @@ body, html {
 	border-radius: 2px;
 }
 
-#titre {
-	flex: 1;
+.formPhoto {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-bottom: 50px;
+	font-family: 'Work Sans' ;
 }
 
-#categorie {
-	flex: 1;
+.formPhoto div {
+	width: 420px;
+	height: 169px;
+	background-color: #E8F1F6;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 30px;
+	margin-bottom: 30px;
+}
+
+#imageIcone {
+	position: relative;
+	bottom: 20px;
+}
+
+#imageLabel {
+	border-radius: 50px ;
+	background-color: #CBD6DC;
+	padding: 10px 30px;
+	margin-bottom: 10px;
+	color: #306685;
+}
+
+#imageUploads {
+	display: none;
+}
+
+#labelTitre {
+	position: relative;
+	right: 195px;
+}
+
+#labelCategorie {
+	position: relative;
+	right: 180px;
+}
+
+.formPhoto input {
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border: none;
 }
 
 /* fenetre modale fin */

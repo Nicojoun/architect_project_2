@@ -159,7 +159,7 @@ const genererImages = function (images) {
         boutonSuppression.addEventListener("click", () => {
                 fetch(url, {
                     method: "DELETE",
-                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjMxOTk0NCwiZXhwIjoxNzEyNDA2MzQ0fQ.82PkoopJgsAeYJArIYYL4sIIfSLFBPa20bV0DYa0RhM" },
+                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjU2MjM1NywiZXhwIjoxNzEyNjQ4NzU3fQ.UsE9nwFYiEbXXk4A-RwAB870Fyql5qp9g9uR5SS8QQg" },
                 })
                 figureImage.innerHTML=""
                 document.querySelector(".gallery figure").innerHTML=""
@@ -168,9 +168,10 @@ const genererImages = function (images) {
     }
 }
 
+
+//ajouter des photos
 const ajouterPhoto = function () {
     const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
-    const imagesProjets = document.querySelector(".imagesProjets")
     const titlemodal = document.getElementById("titlemodal")
     const content = document.querySelector(".content")
 
@@ -179,12 +180,23 @@ const ajouterPhoto = function () {
         titlemodal.innerText = "Ajout photo"
         boutonAjouterPhoto.innerText = "Valider"
         boutonAjouterPhoto.style.backgroundColor = "#A7A7A7"
+        boutonAjouterPhoto.style.padding = "5px 60px"
         content.innerHTML = `
-            <form action="#" method="post">
-                <label for="titre">Titre</label> </br>			
-                <input type="text" name="titre" id="titre"> </br>
-                <label for="categorie">Categorie</label> </br>
-                <input type="select" name="categorie" id="categorie">
+            <form class="formPhoto" action="#" method="post">
+
+                <div>
+                <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
+                    <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
+                    <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
+                    <p> jpg, png : 4mo max</p>
+                </div>
+
+                    <label for="titre" id="labelTitre">Titre</label> </br></br>			
+                    <input type="text" name="titre" id="titre"> </br></br>
+
+                    <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
+                    <input type="select" name="categorie" id="categorie">
+
             </form >
         `
     })

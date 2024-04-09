@@ -168,14 +168,29 @@ const genererImages = function (images) {
     }
 }
 
+//création de la flèche retour
+const header = document.querySelector(".header")
+const flecheRetour = document.createElement("i")
+flecheRetour.className = "fa-solid fa-arrow-left"
+flecheRetour.id = "flecheRetour"
+const modalWrapper = document.querySelector(".modal-wrapper") 
+
+//gestion du bouton ajouter photo
+const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
+const titlemodal = document.getElementById("titlemodal")
+const content = document.querySelector(".content")
 
 //ajouter des photos
-const ajouterPhoto = function () {
-    const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
-    const titlemodal = document.getElementById("titlemodal")
-    const content = document.querySelector(".content")
+const ModaleAjouterPhoto = function () {
 
+    //gestion de la flèche retour
+    flecheRetour.addEventListener("click", () => {
+        location.reload()
+    })
+
+    //modification de la modale quand on clique sur le bouton ajouter photo
     boutonAjouterPhoto.addEventListener("click", () => {
+        header.appendChild(flecheRetour)
         content.innerHTML = ""
         titlemodal.innerText = "Ajout photo"
         boutonAjouterPhoto.innerText = "Valider"
@@ -197,8 +212,23 @@ const ajouterPhoto = function () {
                     <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
                     <input type="select" name="categorie" id="categorie">
 
+                    <input type="submit" id="envoyerPhoto">
+
             </form >
         `
+    })
+
+    const imageLabel = document.getElementById("imageLabel")
+    const formDiv = document.querySelector(".formPhoto div")
+    imageLabel.addEventListener("click", () => {
+        const imageChoisie = document.createElement("img")
+        imageChoisie.src = window.URL.createObjectURL(curFiles[i])
+        formDiv.appendChild(imageChoisie)
+    }) 
+
+    const formPhoto = document.querySelector(".formPhoto")
+    formPhoto.addEventListener("submit",(event) => {
+        event.preventDefault()
     })
 }
 
@@ -207,7 +237,7 @@ document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal)
     genererImages(projets)
 })
-ajouterPhoto()
+ModaleAjouterPhoto()
 
 //fermeture de la modale quand on appuie sur echap
 window.addEventListener("keydown", (e) => {

@@ -159,7 +159,7 @@ const genererImages = function (images) {
         boutonSuppression.addEventListener("click", () => {
                 fetch(url, {
                     method: "DELETE",
-                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjU2MjM1NywiZXhwIjoxNzEyNjQ4NzU3fQ.UsE9nwFYiEbXXk4A-RwAB870Fyql5qp9g9uR5SS8QQg" },
+                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjY0NzEyNCwiZXhwIjoxNzEyNzMzNTI0fQ.tu-HJHaBMD_-MIGl5rNPB7BvIXAnMmj0Xt-RF6UmJ_o" },
                 })
                 figureImage.innerHTML=""
                 document.querySelector(".gallery figure").innerHTML=""
@@ -203,6 +203,7 @@ const ModaleAjouterPhoto = function () {
                 <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
                     <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
                     <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
+                    <img src="" height="200" alt="image choisie" id="imageChoisie">
                     <p> jpg, png : 4mo max</p>
                 </div>
 
@@ -218,18 +219,29 @@ const ModaleAjouterPhoto = function () {
         `
     })
 
-    const imageLabel = document.getElementById("imageLabel")
-    const formDiv = document.querySelector(".formPhoto div")
-    imageLabel.addEventListener("click", () => {
-        const imageChoisie = document.createElement("img")
-        imageChoisie.src = window.URL.createObjectURL(curFiles[i])
-        formDiv.appendChild(imageChoisie)
+    //affichage de la photo à ajouter dans le formulaire de la modale
+    const imageUploads = document.getElementById("imageUploads")
+    const imageChoisie = document.getElementById("imageChoisie")
+    const file = imageUploads.files[0]
+    const reader = new FileReader()
+
+    imageUploads.addEventListener("change", () => {
+        reader.addEventListener("load", () => {
+            imageChoisie.src = reader.result
+        },
+        false,
+        )
+
+        if (file) {
+            reader.readAsDataURL(file)
+        }
     }) 
 
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
         event.preventDefault()
     })
+    
 }
 
 // appel des fonctions de la modale

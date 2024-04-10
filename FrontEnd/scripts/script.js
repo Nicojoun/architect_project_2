@@ -159,7 +159,7 @@ const genererImages = function (images) {
         boutonSuppression.addEventListener("click", () => {
                 fetch(url, {
                     method: "DELETE",
-                    headers: { "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTcxMjY0NzEyNCwiZXhwIjoxNzEyNzMzNTI0fQ.tu-HJHaBMD_-MIGl5rNPB7BvIXAnMmj0Xt-RF6UmJ_o" },
+                    headers: { "Authorization": `Bearer ${connecte}` },
                 })
                 figureImage.innerHTML=""
                 document.querySelector(".gallery figure").innerHTML=""

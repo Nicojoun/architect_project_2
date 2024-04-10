@@ -161,8 +161,8 @@ const genererImages = function (images) {
                     method: "DELETE",
                     headers: { "Authorization": `Bearer ${connecte}` },
                 })
-                figureImage.innerHTML=""
-                document.querySelector(".gallery figure").innerHTML=""
+                figureImage.remove()
+                document.querySelector(".gallery figure").remove()
         })
 
     }

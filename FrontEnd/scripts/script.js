@@ -193,11 +193,9 @@ const ModaleAjouterPhoto = function () {
         header.appendChild(flecheRetour)
         content.innerHTML = ""
         titlemodal.innerText = "Ajout photo"
-        boutonAjouterPhoto.innerText = "Valider"
-        boutonAjouterPhoto.style.backgroundColor = "#A7A7A7"
-        boutonAjouterPhoto.style.padding = "5px 60px"
+        boutonAjouterPhoto.remove()
         content.innerHTML = `
-            <form class="formPhoto" action="#" method="post">
+            <form class="formPhoto">
 
                 <div>
                 <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
@@ -213,7 +211,7 @@ const ModaleAjouterPhoto = function () {
                     <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
                     <input type="select" name="categorie" id="categorie">
 
-                    <input type="submit" id="envoyerPhoto">
+                    <input type="submit" id="envoyerPhoto" value="Valider">
 
             </form >
         `
@@ -236,10 +234,22 @@ const ModaleAjouterPhoto = function () {
             reader.readAsDataURL(file)
         }
     }) 
+      
+    const titre = document.getElementById("titre")
+    const categorie = document.getElementById("categorie")
+    const envoyerPhoto = document.getElementById("envoyerPhoto")
+    console.log(categorie.value)
+
+    if((titre.value !=="")&&(categorie.value !=="")) {
+        console.log("javascript c'est de la merde !!!!!")
+        envoyerPhoto.style.backgroundColor = "#1D6154"
+        // envoyerPhoto.style.remove("backgroundColor")
+    }
 
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
         event.preventDefault()
+        envoyerPhoto.style.backgroundColor = "#1D6154"
     })
     
 }

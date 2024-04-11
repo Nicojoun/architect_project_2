@@ -11,12 +11,12 @@ const mesProjets = document.querySelector("#portfolio h2")
 const edition = document.querySelector(".edition")
 
 //modification de la page si la connection est réussie
-let connecte = window.localStorage.getItem("connexion")
-if (connecte !== null) {
+let token = window.localStorage.getItem("token")
+if (token !== null) {
     //déconnexion
     loginLogout.innerText = "logout"
     loginLogout.addEventListener("click", () => {
-        window.localStorage.removeItem("connexion")
+        window.localStorage.removeItem("token")
     }) 
 
     const modifierProjet = document.createElement("div")
@@ -159,7 +159,7 @@ const genererImages = function (images) {
         boutonSuppression.addEventListener("click", () => {
                 fetch(url, {
                     method: "DELETE",
-                    headers: { "Authorization": `Bearer ${connecte}` },
+                    headers: { "Authorization": `Bearer ${token}` },
                 })
                 figureImage.remove()
                 document.querySelector(".gallery figure").remove()

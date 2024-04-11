@@ -23,7 +23,7 @@ formulaireConnexion.addEventListener("submit", async (event) => {
     spanMessageErreur.innerHTML = ""
     //connexion réussie
     if (response.status === 200) {
-        window.localStorage.setItem("connexion", connexion.token)
+        window.localStorage.setItem("token", connexion.token)
         document.location.href="index.html"; 
     } else  {
         //connexion échouée

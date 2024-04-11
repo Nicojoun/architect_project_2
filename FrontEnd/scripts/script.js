@@ -175,6 +175,11 @@ flecheRetour.className = "fa-solid fa-arrow-left"
 flecheRetour.id = "flecheRetour"
 const modalWrapper = document.querySelector(".modal-wrapper") 
 
+//gestion de la flèche retour
+flecheRetour.addEventListener("click", () => {
+    location.reload()
+})
+
 //gestion du bouton ajouter photo
 const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
 const titlemodal = document.getElementById("titlemodal")
@@ -183,39 +188,31 @@ const content = document.querySelector(".content")
 //ajouter des photos
 const ModaleAjouterPhoto = function () {
 
-    //gestion de la flèche retour
-    flecheRetour.addEventListener("click", () => {
-        location.reload()
-    })
+    header.appendChild(flecheRetour)
+    content.innerHTML = ""
+    titlemodal.innerText = "Ajout photo"
+    boutonAjouterPhoto.remove()
+    content.innerHTML = `
+        <form class="formPhoto">
 
-    //modification de la modale quand on clique sur le bouton ajouter photo
-    boutonAjouterPhoto.addEventListener("click", () => {
-        header.appendChild(flecheRetour)
-        content.innerHTML = ""
-        titlemodal.innerText = "Ajout photo"
-        boutonAjouterPhoto.remove()
-        content.innerHTML = `
-            <form class="formPhoto">
+            <div>
+            <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
+                <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
+                <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
+                <img src="" height="200" alt="image choisie" id="imageChoisie">
+                <p> jpg, png : 4mo max</p>
+            </div>
 
-                <div>
-                <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
-                    <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
-                    <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
-                    <img src="" height="200" alt="image choisie" id="imageChoisie">
-                    <p> jpg, png : 4mo max</p>
-                </div>
+                <label for="titre" id="labelTitre">Titre</label> </br></br>			
+                <input type="text" name="titre" id="titre"> </br></br>
 
-                    <label for="titre" id="labelTitre">Titre</label> </br></br>			
-                    <input type="text" name="titre" id="titre"> </br></br>
+                <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
+                <input type="select" name="categorie" id="categorie">
 
-                    <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
-                    <input type="select" name="categorie" id="categorie">
+                <input type="submit" id="envoyerPhoto" value="Valider">
 
-                    <input type="submit" id="envoyerPhoto" value="Valider">
-
-            </form >
-        `
-    })
+        </form >
+    `
 
     //affichage de la photo à ajouter dans le formulaire de la modale
     const imageUploads = document.getElementById("imageUploads")
@@ -234,24 +231,46 @@ const ModaleAjouterPhoto = function () {
             reader.readAsDataURL(file)
         }
     }) 
-      
+    
     const titre = document.getElementById("titre")
     const categorie = document.getElementById("categorie")
     const envoyerPhoto = document.getElementById("envoyerPhoto")
     console.log(categorie.value)
 
-    if((titre.value !=="")&&(categorie.value !=="")) {
+    // if((titre.value !=="")&&(categorie.value !=="")) {
+    //     console.log("javascript c'est de la merde !!!!!")
+    //     envoyerPhoto.style.backgroundColor = "#1D6154"
+    //     // envoyerPhoto.style.remove("backgroundColor")
+    // }
+
+    let titreChange = false
+    titre.addEventListener("change", () => {
+        titreChange = true
+        return titreChange
+    })
+
+    let categorieChange = false
+    categorie.addEventListener("change", () => {
+        categorieChange = true
+        return categorieChange
+    })
+
+    console.log("titreChange = " + titreChange)
+    console.log("categorieChange = " + categorieChange)
+
+    if ((titreChange === true)&&(categorieChange === true)) {
         console.log("javascript c'est de la merde !!!!!")
         envoyerPhoto.style.backgroundColor = "#1D6154"
-        // envoyerPhoto.style.remove("backgroundColor")
     }
 
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
         event.preventDefault()
-        envoyerPhoto.style.backgroundColor = "#1D6154"
+        // envoyerPhoto.style.backgroundColor = "#1D6154"
+        console.log("titreChange = " + titreChange)
+        console.log("categorieChange = " + categorieChange)
     })
-    
+  
 }
 
 // appel des fonctions de la modale
@@ -259,7 +278,8 @@ document.querySelectorAll(".js-modal").forEach(a => {
     a.addEventListener("click", openModal)
     genererImages(projets)
 })
-ModaleAjouterPhoto()
+//modification de la modale quand on clique sur le bouton ajouter photo
+boutonAjouterPhoto.addEventListener("click", ModaleAjouterPhoto)
 
 //fermeture de la modale quand on appuie sur echap
 window.addEventListener("keydown", (e) => {

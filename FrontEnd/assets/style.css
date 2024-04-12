@@ -78,6 +78,7 @@ body, html {
     padding: 20px;
     background-color: white;
 	border-radius: 10px;
+	font-family: 'Work Sans' ;
 }
 
 .js-modal-close {
@@ -186,6 +187,13 @@ body, html {
 #labelCategorie {
 	position: relative;
 	right: 180px;
+}
+
+#categorie {
+	width: 420px;
+	height: 51px;
+	box-shadow: 0px 4px 14px 0px #00000017;
+	border: none;
 }
 
 .formPhoto input {

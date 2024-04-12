@@ -207,7 +207,11 @@ const ModaleAjouterPhoto = function () {
                 <input type="text" name="titre" id="titre"> </br></br>
 
                 <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
-                <input type="select" name="categorie" id="categorie">
+                <select name="categorie" id="categorie">
+                    <option value="Objets">Objets</option>
+                    <option value="Appartements">Appartements</option>
+                    <option value="HotelsRestaurants">Hotels & restaurants</option>
+                </select>
 
                 <input type="submit" id="envoyerPhoto" value="Valider">
 
@@ -232,16 +236,10 @@ const ModaleAjouterPhoto = function () {
         }
     }) 
     
+    //changement de couleur du bouton valider quand le formulaire de la modale est rempli
     const titre = document.getElementById("titre")
     const categorie = document.getElementById("categorie")
     const envoyerPhoto = document.getElementById("envoyerPhoto")
-    console.log(categorie.value)
-
-    // if((titre.value !=="")&&(categorie.value !=="")) {
-    //     console.log("javascript c'est de la merde !!!!!")
-    //     envoyerPhoto.style.backgroundColor = "#1D6154"
-    //     // envoyerPhoto.style.remove("backgroundColor")
-    // }
 
     let titreChange = false
     titre.addEventListener("change", () => {

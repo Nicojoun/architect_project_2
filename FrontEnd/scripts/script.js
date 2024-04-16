@@ -279,9 +279,22 @@ const ModaleAjouterPhoto = function () {
         updateButtonColor()
     });
 
+    //envoi des données du formulaire
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
         event.preventDefault()
+        console.log(imageChoisie.src)
+        console.log(titre.value)
+        console.log(categorie.value)
+
+        const formData = new formData(formPhoto)
+        formData.append("imageUploads", imageChoisie.src)
+        formData.append("titre", titre.value)
+        formData.append("imageUploads", categorie.value)
+
+        const requete = new fetch()
+        requete.open("POST","http://localhost:5678/api/works" )
+        requete.send(formData)
     }) 
 }
 

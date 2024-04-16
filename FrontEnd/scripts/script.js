@@ -199,7 +199,7 @@ const ModaleAjouterPhoto = function () {
             <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
                 <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
                 <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
-                <img src="" height="200" id="imageChoisie">
+                <img  height="200" id="imageChoisie">
                 <p> jpg, png : 4mo max</p>
             </div>
 
@@ -224,9 +224,8 @@ const ModaleAjouterPhoto = function () {
     const tailleMax = document.querySelector(".formPhoto p")
     const imageUploads = document.getElementById("imageUploads")
     const imageChoisie = document.getElementById("imageChoisie")
-    let fichierChange = false
 
-    imageUploads.addEventListener("change", (event) => {
+    imageUploads.addEventListener("input", (event) => {
         const file = event.target.files[0] // Obtient le fichier sélectionné
 
         if (file) {
@@ -245,40 +244,36 @@ const ModaleAjouterPhoto = function () {
         imageLabel.remove()
         tailleMax.remove()
         imageChoisie.style.maxHeight = "169px"
-        fichierChange = true
         updateButtonColor()
     })
-
     
     //changement de couleur du bouton valider quand le formulaire de la modale est rempli
     const titre = document.getElementById("titre")
     const categorie = document.getElementById("categorie")
     const envoyerPhoto = document.getElementById("envoyerPhoto")
 
-    //déclaration des variables du changement de couleur du boutton valider
-    let titreChange = false    
-    let categorieChange = false
-
-    // Gestion du changement de couleur du bouton
+    // Écouteurs d'événements pour les changements de titre et de catégorie
+    titre.addEventListener("input", () => {
+        updateButtonColor()
+    })
+    
+    categorie.addEventListener("input", () => {
+        updateButtonColor()
+    })
+    
+    // Fonction pour mettre à jour la couleur du bouton
     const updateButtonColor = () => {
-        if (titreChange && categorieChange && fichierChange) {
+        const titreValue = titre.value.trim()
+        const categorieValue = categorie.value.trim()
+        const file = imageUploads.files[0]
+        
+        if (titreValue && categorieValue && file ) {
             envoyerPhoto.style.backgroundColor = "#1D6154"
         } else {
-            envoyerPhoto.style.backgroundColor = "" // Réinitialisation de la couleur
+            envoyerPhoto.style.backgroundColor = ""
         }
-    };
-
-    // Écouteurs d'événements pour les changements de titre et de catégorie
-    titre.addEventListener("change", () => {
-        titreChange = true
-        updateButtonColor()
-    });
-
-    categorie.addEventListener("change", () => {
-        categorieChange = true
-        updateButtonColor()
-    });
-
+    }
+    
     //envoi des données du formulaire
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
@@ -287,7 +282,7 @@ const ModaleAjouterPhoto = function () {
         console.log(titre.value)
         console.log(categorie.value)
 
-        const formData = new formData(formPhoto)
+        const formData = new FormData(formPhoto)
         formData.append("imageUploads", imageChoisie.src)
         formData.append("titre", titre.value)
         formData.append("imageUploads", categorie.value)

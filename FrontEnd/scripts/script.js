@@ -224,6 +224,7 @@ const ModaleAjouterPhoto = function () {
     const tailleMax = document.querySelector(".formPhoto p")
     const imageUploads = document.getElementById("imageUploads")
     const imageChoisie = document.getElementById("imageChoisie")
+    let fichierChange = false
 
     imageUploads.addEventListener("change", (event) => {
         const file = event.target.files[0] // Obtient le fichier sélectionné
@@ -244,7 +245,8 @@ const ModaleAjouterPhoto = function () {
         imageLabel.remove()
         tailleMax.remove()
         imageChoisie.style.maxHeight = "169px"
-
+        fichierChange = true
+        updateButtonColor()
     })
 
     
@@ -259,7 +261,7 @@ const ModaleAjouterPhoto = function () {
 
     // Gestion du changement de couleur du bouton
     const updateButtonColor = () => {
-        if (titreChange && categorieChange) {
+        if (titreChange && categorieChange && fichierChange) {
             envoyerPhoto.style.backgroundColor = "#1D6154"
         } else {
             envoyerPhoto.style.backgroundColor = "" // Réinitialisation de la couleur

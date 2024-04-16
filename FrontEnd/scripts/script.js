@@ -241,34 +241,34 @@ const ModaleAjouterPhoto = function () {
     const categorie = document.getElementById("categorie")
     const envoyerPhoto = document.getElementById("envoyerPhoto")
 
-    let titreChange = false
-    titre.addEventListener("change", () => {
-        titreChange = true
-        return titreChange
-    })
-
+    //déclaration des variables du changement de couleur du boutton valider
+    let titreChange = false    
     let categorieChange = false
+
+    // Gestion du changement de couleur du bouton
+    const updateButtonColor = () => {
+        if (titreChange && categorieChange) {
+            envoyerPhoto.style.backgroundColor = "#1D6154";
+        } else {
+            envoyerPhoto.style.backgroundColor = ""; // Réinitialisation de la couleur
+        }
+    };
+
+    // Écouteurs d'événements pour les changements de titre et de catégorie
+    titre.addEventListener("change", () => {
+        titreChange = true;
+        updateButtonColor();
+    });
+
     categorie.addEventListener("change", () => {
-        categorieChange = true
-        return categorieChange
-    })
-
-    console.log("titreChange = " + titreChange)
-    console.log("categorieChange = " + categorieChange)
-
-    if ((titreChange === true)&&(categorieChange === true)) {
-        console.log("javascript c'est de la merde !!!!!")
-        envoyerPhoto.style.backgroundColor = "#1D6154"
-    }
+        categorieChange = true;
+        updateButtonColor();
+    });
 
     const formPhoto = document.querySelector(".formPhoto")
     formPhoto.addEventListener("submit",(event) => {
         event.preventDefault()
-        // envoyerPhoto.style.backgroundColor = "#1D6154"
-        console.log("titreChange = " + titreChange)
-        console.log("categorieChange = " + categorieChange)
-    })
-  
+    }) 
 }
 
 // appel des fonctions de la modale

@@ -164,7 +164,7 @@ body, html {
 
 #imageIcone {
 	position: relative;
-	bottom: 20px;
+	top: 60px;
 }
 
 #imageLabel {
@@ -173,10 +173,17 @@ body, html {
 	padding: 10px 30px;
 	margin-bottom: 10px;
 	color: #306685;
+	position: relative;
+	top: 90px;
 }
 
 #imageUploads {
-	/* display: none; */
+	display: none;
+}
+
+.formPhoto p {
+	position: relative;
+	bottom: 20px;
 }
 
 #labelTitre {

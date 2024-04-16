@@ -199,7 +199,7 @@ const ModaleAjouterPhoto = function () {
             <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
                 <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
                 <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
-                <img src="" height="200" alt="image choisie" id="imageChoisie">
+                <img src="" height="200" id="imageChoisie">
                 <p> jpg, png : 4mo max</p>
             </div>
 
@@ -219,6 +219,9 @@ const ModaleAjouterPhoto = function () {
     `
 
     // //affichage de la photo à ajouter dans le formulaire de la modale
+    const imageIcone = document.getElementById("imageIcone")
+    const imageLabel = document.getElementById("imageLabel")
+    const tailleMax = document.querySelector(".formPhoto p")
     const imageUploads = document.getElementById("imageUploads")
     const imageChoisie = document.getElementById("imageChoisie")
 
@@ -236,6 +239,12 @@ const ModaleAjouterPhoto = function () {
             // Lit le contenu du fichier en tant que Data URL
             reader.readAsDataURL(file)
         }
+
+        imageIcone.remove()
+        imageLabel.remove()
+        tailleMax.remove()
+        imageChoisie.style.maxHeight = "169px"
+
     })
 
     

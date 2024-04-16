@@ -218,23 +218,26 @@ const ModaleAjouterPhoto = function () {
         </form >
     `
 
-    //affichage de la photo à ajouter dans le formulaire de la modale
+    // //affichage de la photo à ajouter dans le formulaire de la modale
     const imageUploads = document.getElementById("imageUploads")
     const imageChoisie = document.getElementById("imageChoisie")
-    const file = imageUploads.files[0]
-    const reader = new FileReader()
 
-    imageUploads.addEventListener("change", () => {
-        reader.addEventListener("load", () => {
-            imageChoisie.src = reader.result
-        },
-        false,
-        )
+    imageUploads.addEventListener("change", (event) => {
+        const file = event.target.files[0] // Obtient le fichier sélectionné
 
         if (file) {
+            const reader = new FileReader() // Crée un nouvel objet FileReader
+
+            reader.addEventListener("load", () => {
+                // Définit la source de l'image avec les données de l'image chargée
+                imageChoisie.src = reader.result
+            })
+
+            // Lit le contenu du fichier en tant que Data URL
             reader.readAsDataURL(file)
         }
-    }) 
+    })
+
     
     //changement de couleur du bouton valider quand le formulaire de la modale est rempli
     const titre = document.getElementById("titre")
@@ -248,21 +251,21 @@ const ModaleAjouterPhoto = function () {
     // Gestion du changement de couleur du bouton
     const updateButtonColor = () => {
         if (titreChange && categorieChange) {
-            envoyerPhoto.style.backgroundColor = "#1D6154";
+            envoyerPhoto.style.backgroundColor = "#1D6154"
         } else {
-            envoyerPhoto.style.backgroundColor = ""; // Réinitialisation de la couleur
+            envoyerPhoto.style.backgroundColor = "" // Réinitialisation de la couleur
         }
     };
 
     // Écouteurs d'événements pour les changements de titre et de catégorie
     titre.addEventListener("change", () => {
-        titreChange = true;
-        updateButtonColor();
+        titreChange = true
+        updateButtonColor()
     });
 
     categorie.addEventListener("change", () => {
-        categorieChange = true;
-        updateButtonColor();
+        categorieChange = true
+        updateButtonColor()
     });
 
     const formPhoto = document.querySelector(".formPhoto")

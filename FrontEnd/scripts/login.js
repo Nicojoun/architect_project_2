@@ -24,6 +24,7 @@ formulaireConnexion.addEventListener("submit", async (event) => {
     //connexion réussie
     if (response.status === 200) {
         window.localStorage.setItem("token", connexion.token)
+        window.localStorage.setItem("userId", connexion.userId)
         document.location.href="index.html"; 
     } else  {
         //connexion échouée

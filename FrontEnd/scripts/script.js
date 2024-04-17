@@ -186,7 +186,7 @@ const titlemodal = document.getElementById("titlemodal")
 const content = document.querySelector(".content")
 
 //ajouter des photos
-const ModaleAjouterPhoto = function () {
+const modaleAjouterPhoto = function () {
 
     header.appendChild(flecheRetour)
     content.innerHTML = ""
@@ -210,7 +210,7 @@ const ModaleAjouterPhoto = function () {
                 <select name="categorie" id="categorie">
                     <option value="Objets">Objets</option>
                     <option value="Appartements">Appartements</option>
-                    <option value="HotelsRestaurants">Hotels & restaurants</option>
+                    <option value="Hotels_Restaurants">Hotels & restaurants</option>
                 </select>
 
                 <input type="submit" id="envoyerPhoto" value="Valider">
@@ -224,6 +224,7 @@ const ModaleAjouterPhoto = function () {
     const tailleMax = document.querySelector(".formPhoto p")
     const imageUploads = document.getElementById("imageUploads")
     const imageChoisie = document.getElementById("imageChoisie")
+    const formPhotoDiv = document.querySelector(".formPhoto div")
 
     imageUploads.addEventListener("input", (event) => {
         const file = event.target.files[0] // Obtient le fichier sélectionné
@@ -243,7 +244,7 @@ const ModaleAjouterPhoto = function () {
         imageIcone.remove()
         imageLabel.remove()
         tailleMax.remove()
-        imageChoisie.style.maxHeight = "169px"
+        imageChoisie.style.maxHeight = `${formPhotoDiv.clientHeight}px`;
         updateButtonColor()
     })
     
@@ -274,23 +275,75 @@ const ModaleAjouterPhoto = function () {
         }
     }
     
-    //envoi des données du formulaire
+    // Envoi des données du formulaire
     const formPhoto = document.querySelector(".formPhoto")
-    formPhoto.addEventListener("submit",(event) => {
+    formPhoto.addEventListener("submit", async (event) => {
         event.preventDefault()
-        console.log(imageChoisie.src)
-        console.log(titre.value)
-        console.log(categorie.value)
 
+        // Récupération des projets de l’architecte depuis l'API
+        const reponse2 = await fetch('http://localhost:5678/api/works');
+        const projets2 = await reponse2.json();
+
+        //définition des variables contenant les données à envoyer
+        const id = projets2.length + 1
+        const categorieChoisie = categorie.value.replace("_", " & ")
+        const utilisateur = window.localStorage.getItem("userId")
+
+        //Attribution de l'id à la catégorie
+        let categorieId = 0
+        switch(categorie.value) {
+            case "Objets":
+            categorieId = 1
+            break
+            case "Appartements":
+            categorieId = 2
+            break
+            case "Hotels_Restaurants":
+            categorieId = 3
+            break
+        }
+
+        const categorieDonnees = {
+            "id": categorieId,
+            "name": categorieChoisie
+        }
+
+        console.log("id: " + id) 
+        console.log("titre: " + titre.value)
+        // console.log(imageChoisie.src) 
+        console.log("categoryId: " + categorieId)
+        console.log("userId: " + utilisateur)
+        console.log(categorieDonnees)
+
+        //données à envoyer
         const formData = new FormData(formPhoto)
-        formData.append("imageUploads", imageChoisie.src)
-        formData.append("titre", titre.value)
-        formData.append("imageUploads", categorie.value)
-
-        const requete = new fetch()
-        requete.open("POST","http://localhost:5678/api/works" )
-        requete.send(formData)
-    }) 
+        formData.append("id", id)
+        formData.append("title", titre.value)
+        formData.append("imageURL", imageChoisie.src)
+        formData.append("categoryId", categorieId)
+        formData.append("userId", utilisateur)     
+        formData.append("category", categorieDonnees)
+    
+        //envoi des données à l'API
+        try {
+            const response = await fetch("http://localhost:5678/api/works", {
+                method: "POST",
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                },
+                body: formData
+            })
+    
+            if (response.ok) {
+                console.log("Données envoyées avec succès !")
+            } else {
+                console.error("Erreur lors de l'envoi des données :", response.status)
+            }
+        } catch (error) {
+            console.error("Erreur lors de la requête :", error.message)
+        }
+    })
+    
 }
 
 // appel des fonctions de la modale
@@ -299,7 +352,7 @@ document.querySelectorAll(".js-modal").forEach(a => {
     genererImages(projets)
 })
 //modification de la modale quand on clique sur le bouton ajouter photo
-boutonAjouterPhoto.addEventListener("click", ModaleAjouterPhoto)
+boutonAjouterPhoto.addEventListener("click", modaleAjouterPhoto)
 
 //fermeture de la modale quand on appuie sur echap
 window.addEventListener("keydown", (e) => {

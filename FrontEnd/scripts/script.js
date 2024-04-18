@@ -288,6 +288,11 @@ const modaleAjouterPhoto = function () {
         const id = projets2.length + 1
         const categorieChoisie = categorie.value.replace("_", " & ")
         const utilisateur = window.localStorage.getItem("userId")
+        const sourceImage = "http://localhost:5678/images/" + imageUploads.files[0].name
+        const Donneesimage = new Blob(
+            [imageUploads.files[0]],
+            {type: imageUploads.files[0].type }
+        )
 
         //Attribution de l'id à la catégorie
         let categorieId = 0
@@ -310,19 +315,21 @@ const modaleAjouterPhoto = function () {
 
         console.log("id: " + id) 
         console.log("titre: " + titre.value)
-        // console.log(imageChoisie.src) 
+        console.log("source de l'image: " + sourceImage)
+        console.log(Donneesimage) 
         console.log("categoryId: " + categorieId)
         console.log("userId: " + utilisateur)
-        console.log(categorieDonnees)
+        console.log(JSON.stringify(categorieDonnees))
 
         //données à envoyer
         const formData = new FormData(formPhoto)
+        console.log(formData)
         formData.append("id", id)
         formData.append("title", titre.value)
-        formData.append("imageURL", imageChoisie.src)
+        formData.append("imageURL", Donneesimage)
         formData.append("categoryId", categorieId)
         formData.append("userId", utilisateur)     
-        formData.append("category", categorieDonnees)
+        formData.append("category", JSON.stringify(categorieDonnees))
     
         //envoi des données à l'API
         try {

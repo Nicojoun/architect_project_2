@@ -20,7 +20,7 @@ if (token !== null) {
     }) 
 
     const modifierProjet = document.createElement("div")
-    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" class="js-modal">Modifier</a>`
+    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="js-modal_1" class="js-modal">Modifier</a>`
     mesProjets.appendChild(modifierProjet)
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
 } 
@@ -111,6 +111,7 @@ const openModal = function (e) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+    genererImages(projets)
 }
 
 //fermeture de la modale
@@ -208,15 +209,19 @@ const modaleAjouterPhoto = function () {
 
                 <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
                 <select name="categorie" id="categorie">
-                    <option value="Objets">Objets</option>
-                    <option value="Appartements">Appartements</option>
-                    <option value="Hotels_Restaurants">Hotels & restaurants</option>
                 </select>
 
                 <input type="submit" id="envoyerPhoto" value="Valider">
 
         </form >
     `
+    const formCategorie = document.getElementById("categorie")
+    categories.forEach(categorie => {
+        const option = document.createElement("option")
+        option.value = categorie.id
+        option.textContent = categorie.name
+        formCategorie.appendChild(option)
+    })
 
     // //affichage de la photo à ajouter dans le formulaire de la modale
     const imageIcone = document.getElementById("imageIcone")
@@ -280,56 +285,22 @@ const modaleAjouterPhoto = function () {
     formPhoto.addEventListener("submit", async (event) => {
         event.preventDefault()
 
-        // Récupération des projets de l’architecte depuis l'API
-        const reponse2 = await fetch('http://localhost:5678/api/works');
-        const projets2 = await reponse2.json();
-
-        //définition des variables contenant les données à envoyer
-        const id = projets2.length + 1
-        const categorieChoisie = categorie.value.replace("_", " & ")
-        const utilisateur = window.localStorage.getItem("userId")
-        const sourceImage = "http://localhost:5678/images/" + imageUploads.files[0].name
-        const Donneesimage = new Blob(
+        const categorieId = document.getElementById("categorie").value
+        const donneesimage = new Blob(
             [imageUploads.files[0]],
             {type: imageUploads.files[0].type }
         )
 
-        //Attribution de l'id à la catégorie
-        let categorieId = 0
-        switch(categorie.value) {
-            case "Objets":
-            categorieId = 1
-            break
-            case "Appartements":
-            categorieId = 2
-            break
-            case "Hotels_Restaurants":
-            categorieId = 3
-            break
-        }
-
-        const categorieDonnees = {
-            "id": categorieId,
-            "name": categorieChoisie
-        }
-
-        console.log("id: " + id) 
         console.log("titre: " + titre.value)
-        console.log("source de l'image: " + sourceImage)
-        console.log(Donneesimage) 
+        console.log(donneesimage) 
         console.log("categoryId: " + categorieId)
-        console.log("userId: " + utilisateur)
-        console.log(JSON.stringify(categorieDonnees))
-
+  
         //données à envoyer
         const formData = new FormData(formPhoto)
         console.log(formData)
-        formData.append("id", id)
         formData.append("title", titre.value)
-        formData.append("imageURL", Donneesimage)
+        formData.append("imageURL", donneesimage)
         formData.append("categoryId", categorieId)
-        formData.append("userId", utilisateur)     
-        formData.append("category", JSON.stringify(categorieDonnees))
     
         //envoi des données à l'API
         try {
@@ -354,10 +325,8 @@ const modaleAjouterPhoto = function () {
 }
 
 // appel des fonctions de la modale
-document.querySelectorAll(".js-modal").forEach(a => {
-    a.addEventListener("click", openModal)
-    genererImages(projets)
-})
+document.getElementById("js-modal_1").addEventListener("click", openModal)
+
 //modification de la modale quand on clique sur le bouton ajouter photo
 boutonAjouterPhoto.addEventListener("click", modaleAjouterPhoto)
 

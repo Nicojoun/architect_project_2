@@ -231,21 +231,26 @@ const modaleAjouterPhoto = function () {
     const imageChoisie = document.getElementById("imageChoisie")
     const formPhotoDiv = document.querySelector(".formPhoto div")
 
-    imageUploads.addEventListener("input", (event) => {
+    //fonction qui affiche l'image choisie 
+    const lireImage = function(event) {
         const file = event.target.files[0] // Obtient le fichier sélectionné
 
         if (file) {
             const reader = new FileReader() // Crée un nouvel objet FileReader
 
             reader.addEventListener("load", () => {
-                // Définit la source de l'image avec les données de l'image chargée
-                imageChoisie.src = reader.result
+            // Définit la source de l'image avec les données de l'image chargée
+            imageChoisie.src = reader.result
             })
 
             // Lit le contenu du fichier en tant que Data URL
             reader.readAsDataURL(file)
         }
+    }
 
+    //affichage de l'image choisie dans le formaulaire de la modale
+    imageUploads.addEventListener("input", (event) => {
+        lireImage(event)
         imageIcone.remove()
         imageLabel.remove()
         tailleMax.remove()
@@ -286,21 +291,22 @@ const modaleAjouterPhoto = function () {
         event.preventDefault()
 
         const categorieId = document.getElementById("categorie").value
-        const donneesimage = new Blob(
+        const donneesImage = new Blob(
             [imageUploads.files[0]],
             {type: imageUploads.files[0].type }
         )
+        // const donneesImage = imageUploads.files[0]
 
-        console.log("titre: " + titre.value)
-        console.log(donneesimage) 
+        console.log(donneesImage)
+        console.log("titre: " + titre.value) 
         console.log("categoryId: " + categorieId)
   
         //données à envoyer
         const formData = new FormData(formPhoto)
         console.log(formData)
+        formData.append("image", donneesImage)
         formData.append("title", titre.value)
-        formData.append("imageURL", donneesimage)
-        formData.append("categoryId", categorieId)
+        formData.append("category", categorieId)
     
         //envoi des données à l'API
         try {

@@ -213,6 +213,8 @@ const modaleAjouterPhoto = function () {
 
                 <input type="submit" id="envoyerPhoto" value="Valider">
 
+                <p id="errorMessage" style="color: red;"></p>
+
         </form >
     `
     const formCategorie = document.getElementById("categorie")
@@ -231,8 +233,8 @@ const modaleAjouterPhoto = function () {
     const imageChoisie = document.getElementById("imageChoisie")
     const formPhotoDiv = document.querySelector(".formPhoto div")
 
-    //fonction qui affiche l'image choisie 
-    const lireImage = function(event) {
+    //affichage de l'image choisie dans le formaulaire de la modale
+    imageUploads.addEventListener("input", (event) => {
         const file = event.target.files[0] // Obtient le fichier sélectionné
 
         if (file) {
@@ -246,11 +248,7 @@ const modaleAjouterPhoto = function () {
             // Lit le contenu du fichier en tant que Data URL
             reader.readAsDataURL(file)
         }
-    }
 
-    //affichage de l'image choisie dans le formaulaire de la modale
-    imageUploads.addEventListener("input", (event) => {
-        lireImage(event)
         imageIcone.remove()
         imageLabel.remove()
         tailleMax.remove()
@@ -272,30 +270,66 @@ const modaleAjouterPhoto = function () {
         updateButtonColor()
     })
     
-    // Fonction pour mettre à jour la couleur du bouton
+    // // Fonction pour mettre à jour la couleur du bouton
+    // const updateButtonColor = () => {
+    //     const titreValue = titre.value.trim()
+    //     const categorieValue = categorie.value.trim()
+    //     const file = imageUploads.files[0]
+        
+    //     if (titreValue && categorieValue && file ) {
+    //         envoyerPhoto.style.backgroundColor = "#1D6154"
+    //         envoyerPhoto.removeEventListener("click", erreurFormulaire)
+    //         formPhoto.addEventListener("submit", validerFormulaire)
+    //     } else {
+    //         envoyerPhoto.style.backgroundColor = ""
+    //         formPhoto.removeEventListener("submit", validerFormulaire)
+    //         envoyerPhoto.addEventListener("click", erreurFormulaire)
+    //     }
+    // }
+
+
+    // Fonction pour mettre à jour la couleur du bouton et gérer les erreurs
     const updateButtonColor = () => {
         const titreValue = titre.value.trim()
         const categorieValue = categorie.value.trim()
         const file = imageUploads.files[0]
-        
-        if (titreValue && categorieValue && file ) {
+
+        const errorMessage = document.getElementById("errorMessage")
+
+        if (titreValue && categorieValue && file) {
             envoyerPhoto.style.backgroundColor = "#1D6154"
+            envoyerPhoto.removeEventListener("click", erreurFormulaire)
+            formPhoto.addEventListener("submit", validerFormulaire)
+            errorMessage.innerText = "" // Effacer le message d'erreur
         } else {
             envoyerPhoto.style.backgroundColor = ""
+            formPhoto.removeEventListener("submit", validerFormulaire)
+            envoyerPhoto.addEventListener("click", erreurFormulaire)
         }
     }
-    
     // Envoi des données du formulaire
     const formPhoto = document.querySelector(".formPhoto")
-    formPhoto.addEventListener("submit", async (event) => {
+
+    const erreurFormulaire = function() {
+        errorMessage.innerText = "Veuillez remplir tous les champs pour continuer." // Afficher le message d'erreur
+    }
+
+    const validerFormulaire = async function(event) {
+
         event.preventDefault()
 
         const categorieId = document.getElementById("categorie").value
-        const donneesImage = new Blob(
-            [imageUploads.files[0]],
-            {type: imageUploads.files[0].type }
-        )
-        // const donneesImage = imageUploads.files[0]
+        // const donneesImage = new Blob(
+        //     [imageUploads.files[0]],
+        //     {type: imageUploads.files[0].type }
+        // )
+
+        const donneesImage = imageUploads.files[0]
+        // let reader = new FileReader()
+        // reader.readAsDataURL(donneesImage)
+ 
+        // const donneesImage = new FileReader(imageUploads.files[0])
+        // donneesImage.readAsDataURL(imageUploads.files[0])
 
         console.log(donneesImage)
         console.log("titre: " + titre.value) 
@@ -303,18 +337,17 @@ const modaleAjouterPhoto = function () {
   
         //données à envoyer
         const formData = new FormData(formPhoto)
-        console.log(formData)
         formData.append("image", donneesImage)
         formData.append("title", titre.value)
         formData.append("category", categorieId)
+
+        console.log(formData)
     
         //envoi des données à l'API
         try {
             const response = await fetch("http://localhost:5678/api/works", {
                 method: "POST",
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                },
+                headers: { "Authorization": `Bearer ${token}` },
                 body: formData
             })
     
@@ -326,7 +359,8 @@ const modaleAjouterPhoto = function () {
         } catch (error) {
             console.error("Erreur lors de la requête :", error.message)
         }
-    })
+
+    }
     
 }
 

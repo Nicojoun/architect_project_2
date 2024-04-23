@@ -199,16 +199,16 @@ const modaleAjouterPhoto = function () {
             <div>
             <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
                 <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
-                <input type="file" id="imageUploads" name="imageUploads" accept="image/png, image/jpeg" />
+                <input type="file" id="imageUploads" name="image" accept="image/png, image/jpeg" />
                 <img  height="200" id="imageChoisie">
                 <p> jpg, png : 4mo max</p>
             </div>
 
                 <label for="titre" id="labelTitre">Titre</label> </br></br>			
-                <input type="text" name="titre" id="titre"> </br></br>
+                <input type="text" name="title" id="titre"> </br></br>
 
                 <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
-                <select name="categorie" id="categorie">
+                <select name="category" id="categorie">
                 </select>
 
                 <input type="submit" id="envoyerPhoto" value="Valider">
@@ -270,24 +270,6 @@ const modaleAjouterPhoto = function () {
         updateButtonColor()
     })
     
-    // // Fonction pour mettre à jour la couleur du bouton
-    // const updateButtonColor = () => {
-    //     const titreValue = titre.value.trim()
-    //     const categorieValue = categorie.value.trim()
-    //     const file = imageUploads.files[0]
-        
-    //     if (titreValue && categorieValue && file ) {
-    //         envoyerPhoto.style.backgroundColor = "#1D6154"
-    //         envoyerPhoto.removeEventListener("click", erreurFormulaire)
-    //         formPhoto.addEventListener("submit", validerFormulaire)
-    //     } else {
-    //         envoyerPhoto.style.backgroundColor = ""
-    //         formPhoto.removeEventListener("submit", validerFormulaire)
-    //         envoyerPhoto.addEventListener("click", erreurFormulaire)
-    //     }
-    // }
-
-
     // Fonction pour mettre à jour la couleur du bouton et gérer les erreurs
     const updateButtonColor = () => {
         const titreValue = titre.value.trim()
@@ -315,33 +297,10 @@ const modaleAjouterPhoto = function () {
     }
 
     const validerFormulaire = async function(event) {
-
         event.preventDefault()
 
-        const categorieId = document.getElementById("categorie").value
-        // const donneesImage = new Blob(
-        //     [imageUploads.files[0]],
-        //     {type: imageUploads.files[0].type }
-        // )
-
-        const donneesImage = imageUploads.files[0]
-        // let reader = new FileReader()
-        // reader.readAsDataURL(donneesImage)
- 
-        // const donneesImage = new FileReader(imageUploads.files[0])
-        // donneesImage.readAsDataURL(imageUploads.files[0])
-
-        console.log(donneesImage)
-        console.log("titre: " + titre.value) 
-        console.log("categoryId: " + categorieId)
-  
         //données à envoyer
         const formData = new FormData(formPhoto)
-        formData.append("image", donneesImage)
-        formData.append("title", titre.value)
-        formData.append("category", categorieId)
-
-        console.log(formData)
     
         //envoi des données à l'API
         try {

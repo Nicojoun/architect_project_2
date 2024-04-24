@@ -32,6 +32,7 @@ const genererProjets = function (projets) {
     
         // Création d’une balise dédiée à un projet
         const figureProjet = document.createElement("figure")
+        figureProjet.id = "projet_" + projet.id
     
         // création des balises
         const imageProjet = document.createElement("img")
@@ -111,6 +112,7 @@ const openModal = function (e) {
     modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
+    document.querySelector(".imagesProjets").innerHTML = ""
     genererImages(projets)
 }
 
@@ -149,7 +151,6 @@ const genererImages = function (images) {
         //création des balises des boutons
         const boutonSuppression = document.createElement("button")
         boutonSuppression.innerHTML = `<i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>`
-        boutonSuppression.id = image.id
 
         imagesProjets.appendChild(figureImage)
         figureImage.appendChild(imageMiniature)
@@ -162,8 +163,14 @@ const genererImages = function (images) {
                     method: "DELETE",
                     headers: { "Authorization": `Bearer ${token}` },
                 })
-                figureImage.remove()
-                document.querySelector(".gallery figure").remove()
+
+                //suppression du projet correspondant dans la zone "mes projets"
+                .then(data => {
+                    data.id = image.id
+                    figureImage.remove()
+                    document.getElementById("projet_" + data.id).remove()
+                })
+
         })
 
     }

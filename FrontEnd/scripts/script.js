@@ -101,24 +101,26 @@ genererFiltres(categories)
 
 let modal = null
 
+// const genererModale = function() {
+//     const modalWrapper = document.querySelector("modalWrapper")
+
+//     modalWrapper.innerHTML = `
+//     <div class="header">
+//     </div>
+
+//     <div class="content">
+//     </div>
+
+//     <div class="footer">
+//         <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
+//     </div>
+//     `
+// }
+
 //ouverture de la modale
 const openModal = function (e) {
     e.preventDefault()
-    //const modale = document.querySelector(".modal")
-    // modale.innerHTML = `	
-    // <div class="modal-wrapper js-modal-stop">
-    //     <div class="header">
-    //         <i class="fa-solid fa-xmark js-modal-close" ></i>
-    //         <h1 id="titlemodal">Galerie photo</h1>
-    //     </div>
-    //     <div class="content">
-    //         <div class="imagesProjets"></div>
-    //     </div>
-    //     <div class="footer">
-    //         <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
-    //     </div>
-    // </div>
-    // `
+    // genererModale()
     const target = document.querySelector(e.target.getAttribute("href"))
     target.style.display = null
     target.removeAttribute("aria-hidden")
@@ -198,47 +200,10 @@ flecheRetour.className = "fa-solid fa-arrow-left"
 flecheRetour.id = "flecheRetour"
 const modalWrapper = document.querySelector(".modal-wrapper") 
 
-// const closeModalToPreviousState = function () {
-//     if (modal === null) return
-//     modal.style.display = "none"
-//     modal.setAttribute("aria-hidden", "true")
-//     modal.removeAttribute("aria-modal")
-//     modal.removeEventListener("click", closeModal)
-//     modal.querySelector(".js-modal-close").removeEventListener("click", closeModal)
-//     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
-//     modal = null
-
-//     // Ici, vous pouvez ajouter d'autres actions pour réinitialiser la modal à son état précédent
-//     // Par exemple, réinitialisez les champs du formulaire, etc.
-// }
-
 //gestion du bouton ajouter photo
 const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
 const titlemodal = document.getElementById("titlemodal")
 const content = document.querySelector(".content")
-
-// //gestion de la flèche retour
-// flecheRetour.addEventListener("click", () => {
-//     // location.reload()
-//     // closeModalToPreviousState()
-//     modalWrapper.innerHTML = `
-//                                 <div class="header">
-//                                     <i class="fa-solid fa-xmark js-modal-close" ></i>
-//                                     <h1 id="titlemodal">Galerie photo</h1>
-//                                 </div>
-//                                 <div class="content">
-//                                     <div class="imagesProjets"></div>
-//                                 </div>
-//                                 <div class="footer">
-//                                     <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
-//                                 </div>
-//     `
-//     // genererImages(projets)
-//     // //modification de la modale quand on clique sur le bouton ajouter photo
-//     // boutonAjouterPhoto.addEventListener("click", modaleAjouterPhoto)
-//     // closeModal()
-//     // modalWrapper.reload()
-// })
 
 // Gestion de la flèche retour
 flecheRetour.addEventListener("click", async () => {
@@ -411,18 +376,6 @@ const modaleAjouterPhoto = function () {
                                             <figcaption>${nouveauProjet.title}</figcaption>
                 `
                 gallery.append(figureProjet)
-
-                // // Générer et ajouter le nouvel élément HTML pour la galerie photo de la modale
-                // const imagesProjets = document.querySelector(".imagesProjets")
-                // const figureModale = document.createElement("figure")
-
-                // figureModale.innerHTML = `
-                //                             <img src="${nouveauProjet.imageUrl}" alt="${nouveauProjet.title}">
-                //                             <button>
-                //                                 <i class="fa-solid fa-trash-can" style="color: #ffffff;"></i>
-                //                             </button>
-                // `
-                // imagesProjets.append(figureModale)
                 
             } else {
                 console.error("Erreur lors de l'envoi des données :", response.status)

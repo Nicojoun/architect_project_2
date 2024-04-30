@@ -67,7 +67,7 @@ const genererFiltres = function (categories) {
             const categoriesFiltrees = projets.filter(function (projet) {
                 return projet.category.name === boutonFiltre.innerText
             })
-            document.querySelector(".gallery").innerHTML = "";
+            document.querySelector(".gallery").innerHTML = ""
             genererProjets(categoriesFiltrees)
             
         })
@@ -75,7 +75,7 @@ const genererFiltres = function (categories) {
     //Réinitilisation des filtres et affichage de tous les projets
     const boutonTous = document.getElementById("tous")
     boutonTous.addEventListener("click", () => {
-        document.querySelector(".gallery").innerHTML = "";
+        document.querySelector(".gallery").innerHTML = ""
         genererProjets(projets)
     })
 }
@@ -99,28 +99,69 @@ genererFiltres(categories)
 
 //fenêtre modale
 
-let modal = null
+let modal = null;
 
-// const genererModale = function() {
-//     const modalWrapper = document.querySelector("modalWrapper")
+const genererModale = (titre, content, footer) => {
+    const html = `
+        <div class="modal-wrapper js-modal-stop">
+            <div class="header">
+                <i class="fa-solid fa-xmark js-modal-close"></i>
+                ${titre}
+            </div>
+            <div class="content">
+                ${content}
+            </div>
+            <div class="footer">
+                ${footer}
+            </div>
+        </div>`;
+    return html;
+}
 
-//     modalWrapper.innerHTML = `
-//     <div class="header">
-//     </div>
+const genereModaleProjets = () => {
+    const titre = `<h1 id="titlemodal">Galerie photo</h1>`
+    const content = `<div class="imagesProjets"></div>`
+    const footer = `<button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>`
+    return genererModale(titre, content, footer)
+}
 
-//     <div class="content">
-//     </div>
 
-//     <div class="footer">
-//         <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
-//     </div>
-//     `
-// }
+const genererModaleUpload = () => {
+    const titre = `<h1 id="titlemodal">Ajout photo</h1>`
 
-//ouverture de la modale
+    const content = `<form class="formPhoto">
+
+                        <div>
+                        <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
+                            <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
+                            <input type="file" id="imageUploads" name="image" accept="image/png, image/jpeg" />
+                            <img  height="200" id="imageChoisie">
+                            <p> jpg, png : 4mo max</p>
+                        </div>
+
+                        <label for="titre" id="labelTitre">Titre</label> </br></br>			
+                        <input type="text" name="title" id="titre"> </br></br>
+
+                        <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
+                        <select name="category" id="categorie">
+                        </select>
+
+                        <input type="submit" id="envoyerPhoto" value="Valider">
+
+                        <p id="errorMessage" style="color: red;"></p>
+
+                    </form >`
+
+    const footer = ``
+
+    return genererModale(titre, content, footer)
+}
+
+// Ouverture de la modale
 const openModal = function (e) {
     e.preventDefault()
-    // genererModale()
+    const modalHtml = genereModaleProjets() // Générer le HTML de la modale
+    document.getElementById("modal1").innerHTML = modalHtml
     const target = document.querySelector(e.target.getAttribute("href"))
     target.style.display = null
     target.removeAttribute("aria-hidden")
@@ -239,34 +280,13 @@ flecheRetour.addEventListener("click", async () => {
 //ajouter des photos
 const modaleAjouterPhoto = function () {
 
-    header.appendChild(flecheRetour)
-    content.innerHTML = ""
-    titlemodal.innerText = "Ajout photo"
-    boutonAjouterPhoto.remove()
-    content.innerHTML = `
-        <form class="formPhoto">
+    //header.appendChild(flecheRetour)
+    // content.innerHTML = ""
+    // titlemodal.innerText = "Ajout photo"
+    // boutonAjouterPhoto.remove()
 
-            <div>
-            <i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
-                <label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
-                <input type="file" id="imageUploads" name="image" accept="image/png, image/jpeg" />
-                <img  height="200" id="imageChoisie">
-                <p> jpg, png : 4mo max</p>
-            </div>
+    // openModaleFormulaire()
 
-                <label for="titre" id="labelTitre">Titre</label> </br></br>			
-                <input type="text" name="title" id="titre"> </br></br>
-
-                <label for="categorie" id="labelCategorie">Categorie</label> </br></br>
-                <select name="category" id="categorie">
-                </select>
-
-                <input type="submit" id="envoyerPhoto" value="Valider">
-
-                <p id="errorMessage" style="color: red;"></p>
-
-        </form >
-    `
     const formCategorie = document.getElementById("categorie")
     categories.forEach(categorie => {
         const option = document.createElement("option")
@@ -389,11 +409,28 @@ const modaleAjouterPhoto = function () {
     
 }
 
-// appel des fonctions de la modale
-document.getElementById("js-modal_1").addEventListener("click", openModal)
+// // appel des fonctions de la modale
+// document.getElementById("js-modal_1").addEventListener("click", openModal)
 
-//modification de la modale quand on clique sur le bouton ajouter photo
-boutonAjouterPhoto.addEventListener("click", modaleAjouterPhoto)
+// appel des fonctions de la modale
+document.getElementById("js-modal_1").addEventListener("click", (e) => {
+    openModal(e)
+
+    const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
+    // Modification de la modale lorsque le bouton "Ajouter photo" est cliqué
+    boutonAjouterPhoto.addEventListener("click", () => {
+    // Génération de la modale d'upload
+    const modalHtml = genererModaleUpload()
+    
+    // Remplacement du contenu de la modale par le nouveau HTML
+    const modalContainer = document.getElementById("modal1")
+    modalContainer.innerHTML = modalHtml
+
+    // Appel de la fonction pour gérer la modale d'ajout de photo
+    modaleAjouterPhoto()
+
+    })
+})
 
 //fermeture de la modale quand on appuie sur echap
 window.addEventListener("keydown", (e) => {

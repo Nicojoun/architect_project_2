@@ -167,7 +167,6 @@ const openModal = function (e) {
     target.removeAttribute("aria-hidden")
     target.setAttribute("aria-modal", "true")
     modal = target
-    // modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     document.querySelector(".imagesProjets").innerHTML = ""
@@ -246,22 +245,45 @@ const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
 const titlemodal = document.getElementById("titlemodal")
 const content = document.querySelector(".content")
 
+// // Gestion de la flèche retour
+// flecheRetour.addEventListener("click", async () => {
+//     const modalWrapper = document.querySelector(".modal-wrapper") 
+//     modalWrapper.innerHTML = `
+//         <div class="modal-wrapper js-modal-stop">
+//             <div class="header">
+//                 <i class="fa-solid fa-xmark js-modal-close"></i>
+//                 <h1 id="titlemodal">Galerie photo</h1>
+//             </div>
+//             <div class="content">
+//                 <div class="imagesProjets"></div>
+//             </div>
+//             <div class="footer">
+//                 <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
+//             </div>
+//         </div>
+//      `
+
+//     // Récupération des projets de l’architecte depuis l'API
+//     const reponse_2 = await fetch('http://localhost:5678/api/works');
+//     const projets_2 = await reponse_2.json();
+
+//     // Récupération des images des projets pour les afficher dans la modale
+//     genererImages(projets_2)
+
+//     // Réattacher les événements nécessaires à la modale
+//     const boutonAjouterPhoto = document.getElementById("ajouterPhoto")
+//     boutonAjouterPhoto.addEventListener("click", modaleAjouterPhoto)
+//     closeModal()  // Si nécessaire pour réinitialiser les événements de fermeture de la modale
+// });
+
 // Gestion de la flèche retour
 flecheRetour.addEventListener("click", async () => {
-    modalWrapper.innerHTML = `
-        <div class="modal-wrapper js-modal-stop">
-            <div class="header">
-                <i class="fa-solid fa-xmark js-modal-close"></i>
-                <h1 id="titlemodal">Galerie photo</h1>
-            </div>
-            <div class="content">
-                <div class="imagesProjets"></div>
-            </div>
-            <div class="footer">
-                <button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
-            </div>
-        </div>
-     `
+    // Génération de la modale d'upload
+    const modalHtml = genereModaleProjets()
+    
+    // Remplacement du contenu de la modale par le nouveau HTML
+    const modalContainer = document.getElementById("modal1")
+    modalContainer.innerHTML = modalHtml
 
     // Récupération des projets de l’architecte depuis l'API
     const reponse_2 = await fetch('http://localhost:5678/api/works');
@@ -280,6 +302,7 @@ flecheRetour.addEventListener("click", async () => {
 //ajouter des photos
 const modaleAjouterPhoto = function () {
 
+    const header = document.querySelector(".header")
     header.appendChild(flecheRetour)
     // content.innerHTML = ""
     // titlemodal.innerText = "Ajout photo"
@@ -414,6 +437,7 @@ const modaleAjouterPhoto = function () {
 
 // appel des fonctions de la modale
 document.getElementById("js-modal_1").addEventListener("click", (e) => {
+
     openModal(e)
 
     const boutonAjouterPhoto = document.getElementById("ajouterPhoto")

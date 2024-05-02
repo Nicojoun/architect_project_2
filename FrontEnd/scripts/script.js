@@ -167,7 +167,7 @@ const openModal = function (e) {
     target.removeAttribute("aria-hidden")
     target.setAttribute("aria-modal", "true")
     modal = target
-    modal.addEventListener("click", closeModal)
+    // modal.addEventListener("click", closeModal)
     modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
     modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     document.querySelector(".imagesProjets").innerHTML = ""
@@ -280,7 +280,7 @@ flecheRetour.addEventListener("click", async () => {
 //ajouter des photos
 const modaleAjouterPhoto = function () {
 
-    //header.appendChild(flecheRetour)
+    header.appendChild(flecheRetour)
     // content.innerHTML = ""
     // titlemodal.innerText = "Ajout photo"
     // boutonAjouterPhoto.remove()

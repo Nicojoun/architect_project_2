@@ -13,11 +13,13 @@
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<link rel="stylesheet" href="./assets/style.css">
 	<script type="module" src="scripts/script.js"></script>
+	<script type="module" src="scripts/modale.js"></script>
+	<script type="module" src="scripts/form_modale.js"></script>
 </head>
 <div class="edition"></div>	
 <body>
 
-<!-- <aside id = "modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+<aside id = "modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
 	<div class="modal-wrapper js-modal-stop">
 		<div class="header">
 			<i class="fa-solid fa-xmark js-modal-close" ></i>
@@ -27,14 +29,38 @@
 			<div class="imagesProjets"></div>
 		</div>
 		<div class="footer">
-			<button id="ajouterPhoto" class="boutonsFiltres">Ajouter une photo</button>
+			<button id="ajouterPhoto" class="boutonsFiltres" href="#modalForm">Ajouter une photo</button>
 		</div>
 	</div>			
-</aside> -->
+</aside>
 
-<aside id = "modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
-	<!-- <div class="modal-wrapper js-modal-stop">
-	</div>			 -->
+<aside id = "modalForm" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+	<div class="modal-wrapper js-modal-stop">
+		<i id="flecheRetour" class="fa-solid fa-arrow-left" href="#modal1"></i>
+
+		<form class="formPhoto">
+
+			<div>
+			<i class="fa-regular fa-image fa-2xl" style="color: #b9c5cc;" id="imageIcone"></i>
+				<label for="imageUploads" id="imageLabel">+ Ajouter photo</label>
+				<input type="file" id="imageUploads" name="image" accept="image/png, image/jpeg" />
+				<img  height="200" id="imageChoisie">
+				<p> jpg, png : 4mo max</p>
+			</div>
+
+			<label for="titre" id="labelTitre">Titre</label> </br></br>			
+			<input type="text" name="title" id="titre"> </br></br>
+
+			<label for="categorie" id="labelCategorie">Categorie</label> </br></br>
+			<select name="category" id="categorie">
+			</select>
+
+			<input type="submit" id="envoyerPhoto" value="Valider">
+
+			<p id="errorMessage" style="color: red;"></p>
+
+		</form >
+	</div>			
 </aside>
 
 <header>

@@ -138,11 +138,6 @@ body, html {
 
 /* modale formulaire */
 
-#flecheRetour {
-	position: relative;
-	bottom: 40px;
-}
-
 .formPhoto {
 	display: flex;
 	flex-direction: column;

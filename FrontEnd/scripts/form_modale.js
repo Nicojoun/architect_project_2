@@ -14,7 +14,8 @@ const categories = await reponseCategories.json();
 let token = window.localStorage.getItem("token")
 
 //récupération des éléments
-const modalWrapper = document.querySelector(".modal-wrapper") 
+const modalWrapper = document.querySelector(".modal-wrapper")
+const imagesProjets = document.querySelector(".imagesProjets") 
 const flecheRetour = document.getElementById("flecheRetour")
 const formPhoto = document.querySelector(".formPhoto")
 const imageIcone = document.getElementById("imageIcone")
@@ -29,8 +30,11 @@ const envoyerPhoto = document.getElementById("envoyerPhoto")
 
 // Gestion de la flèche retour
 const retourModale = async function(e) {
- console.log("I enjoy eating ice creams on the moon")
- openModal(e)
+    closeModal(e)
+    imagesProjets.innerHTML = ""
+    const reponse_2 = await fetch('http://localhost:5678/api/works');
+    const projets_2 = await reponse_2.json();
+    genererImages(projets_2)
 }
 
 //affichage de l'image choisie dans le formaulaire de la modale
@@ -140,9 +144,6 @@ const validerFormulaire = async function(event) {
 flecheRetour.addEventListener("click", (e) => {
     retourModale(e)
 })
-
-// //gestion de la flèche retour
-// flecheRetour.addEventListener("click", closeModal)
 
 //affichage de l'image choisie
 imageUploads.addEventListener("input",(event) => {

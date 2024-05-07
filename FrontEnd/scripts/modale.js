@@ -19,9 +19,6 @@ const openModal = function (e) {
     target.removeAttribute("aria-hidden")
     target.setAttribute("aria-modal", "true")
     modal = target
-    modal.addEventListener("click", closeModal)
-    modal.querySelector(".js-modal-close").addEventListener("click", closeModal)
-    modal.querySelector(".js-modal-stop").addEventListener("click", stopPropagation)
     document.querySelector(".imagesProjets").innerHTML = ""
     genererImages(projets)
 }
@@ -29,35 +26,29 @@ export { openModal };
 
 //fermeture de la modale
 const closeModal = function (e) {
-    if (modal === null) return;
-    if (modal.id === "modalForm") {
-        const isClickInsideModal = modal.contains(e.target); // Vérifier si le clic se produit à l'intérieur de la modale
-        if (isClickInsideModal) return; // Si le clic est à l'intérieur de la modale, ne pas fermer la modale
-    }
     e.preventDefault();
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
-    modal.querySelector(".js-modal-close").removeEventListener("click", closeModal);
-    modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation);
     modal = null;
 }
 export { closeModal };
-
-
 
 //cliquer à l'intérieur de la modale ne la ferme pas
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
-//fermeture de la modale quand on appuie sur echap
-window.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" || e.key === "Esc" ) {
-        closeModal(e)
+// Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
+window.addEventListener("click", (e) => {
+    const modale = document.querySelector(".modal");
+    if (modale && !modale.contains(e.target)) {
+        closeModal();
     }
-} )
+});
+
+
 
 //Génération des images des projets dans la modale
 const genererImages = function (images) {
@@ -106,6 +97,9 @@ export { genererImages };
 
 //ouverture de la modale des projets
 document.getElementById("js-modal_1").addEventListener("click", openModal)
+
+//fermeture de la modale des projets quand on clique sur la croix
+document.querySelector(".js-modal-close").addEventListener("click", closeModal)
 
 //ouverture de la modale du formulaire
 document.getElementById("ajouterPhoto").addEventListener("click",openModal)

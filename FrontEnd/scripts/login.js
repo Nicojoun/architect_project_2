@@ -3,7 +3,7 @@ const formulaireConnexion = document.querySelector("form")
 const spanMessageErreur = document.createElement("span")
 
 formulaireConnexion.addEventListener("submit", async (event) => {
-        
+         
     event.preventDefault()
     // Création de l’objet de la connexion
     const login = {

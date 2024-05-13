@@ -8,7 +8,7 @@ const categories = await reponseCategories.json();
 
 //récupération du token
 let token = window.localStorage.getItem("token")
-
+ 
 const loginLogout = document.getElementById("loginLogout")
 const mesProjets = document.querySelector("#portfolio h2")
 const edition = document.querySelector(".edition")

@@ -23,7 +23,7 @@ const openModal = function (e) {
     genererImages(projets)
 }
 export { openModal };
-
+ 
 //fermeture de la modale
 const closeModal = function (modaleCiblee) {
     let modal = document.getElementById(modaleCiblee)
@@ -40,13 +40,13 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
-// // Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
-// window.addEventListener("click", (e) => {
-//     const modale = document.querySelector(".modal");
-//     if (modale && !modale.contains(e.target)) {
-//         closeModal("modal1");
-//     }
-// });
+// Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
+window.addEventListener("click", (e) => {
+    const modale = document.querySelector(".modal");
+    if (modale && !modale.contains(e.target)) {
+        closeModal("modal1");
+    }
+});
 
 
 

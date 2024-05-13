@@ -30,7 +30,8 @@ const envoyerPhoto = document.getElementById("envoyerPhoto")
 
 // Gestion de la flèche retour
 const retourModale = async function(e) {
-    closeModal(e)
+    closeModal("modalForm")
+    openModal(e)
     imagesProjets.innerHTML = ""
     const reponse_2 = await fetch('http://localhost:5678/api/works');
     const projets_2 = await reponse_2.json();
@@ -72,7 +73,7 @@ categories.forEach(categorie => {
 // Fonction pour mettre à jour la couleur du bouton et gérer les erreurs
 const updateButtonColor = () => {
     const titreValue = titre.value.trim()
-    const categorieValue = categorie.value.trim()
+    const categorieValue = formCategorie.value.trim()
     const file = imageUploads.files[0]
 
     const errorMessage = document.getElementById("errorMessage")
@@ -140,10 +141,21 @@ const validerFormulaire = async function(event) {
 
 //appel des fonctions
 
-//gestion de la flèche retour
+
+//appel de la fonction de la flèche retour
 flecheRetour.addEventListener("click", (e) => {
     retourModale(e)
 })
+
+// //fermeture de la modale quand on clique sur la croix
+// document.querySelector(".fermerFormulaire").addEventListener("click", closeModal)
+
+//fermeture de la modale quand on clique sur la croix
+document.querySelector(".fermerFormulaire").addEventListener("click",() => {
+    closeModal("modalForm")
+    closeModal("modal1")
+})
+
 
 //affichage de l'image choisie
 imageUploads.addEventListener("input",(event) => {

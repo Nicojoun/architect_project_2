@@ -25,8 +25,8 @@ const openModal = function (e) {
 export { openModal };
 
 //fermeture de la modale
-const closeModal = function (e) {
-    e.preventDefault();
+const closeModal = function (modaleCiblee) {
+    let modal = document.getElementById(modaleCiblee)
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
@@ -40,13 +40,13 @@ const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
-// Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
-window.addEventListener("click", (e) => {
-    const modale = document.querySelector(".modal");
-    if (modale && !modale.contains(e.target)) {
-        closeModal();
-    }
-});
+// // Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
+// window.addEventListener("click", (e) => {
+//     const modale = document.querySelector(".modal");
+//     if (modale && !modale.contains(e.target)) {
+//         closeModal();
+//     }
+// });
 
 
 
@@ -95,12 +95,18 @@ export { genererImages };
 
 // appel des fonctions de la modale
 
-//ouverture de la modale des projets
-document.getElementById("js-modal_1").addEventListener("click", openModal)
 
-//fermeture de la modale des projets quand on clique sur la croix
-document.querySelector(".js-modal-close").addEventListener("click", closeModal)
+//fermeture de la modale quand on clique sur la croix
+document.querySelector(".js-modal-close").addEventListener("click", () =>{
+    closeModal("modal1")
+})
+
+// //ouverture de la modale des projets
+document.getElementById("ajouterPhoto").addEventListener("click", (e) => {
+    openModal(e)
+})
 
 //ouverture de la modale du formulaire
-document.getElementById("ajouterPhoto").addEventListener("click",openModal)
-
+document.getElementById("js-modal_1").addEventListener("click", (e) => {
+    openModal(e)
+})

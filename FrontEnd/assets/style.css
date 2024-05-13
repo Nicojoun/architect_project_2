@@ -138,9 +138,9 @@ body, html {
 
 /* modale formulaire */
 
-#flecheRetour {
+.fermerFormulaire {
 	position: relative;
-	bottom: 40px;
+	bottom: 3px;
 }
 
 .formPhoto {
@@ -148,6 +148,7 @@ body, html {
 	flex-direction: column;
 	align-items: center;
 	font-family: 'Work Sans' ;
+	border-bottom: 1px solid #B3B3B3
 }
 
 .formPhoto div {

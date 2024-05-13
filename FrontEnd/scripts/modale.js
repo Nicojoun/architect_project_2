@@ -9,6 +9,7 @@ const categories = await reponseCategories.json();
 //récupération du token
 let token = window.localStorage.getItem("token")
 
+<<<<<<< HEAD
 let modal = null;
 const boutonModifier = document.getElementById("js-modal_1")
 
@@ -84,12 +85,40 @@ const closeModal = function (e) {
     modal.querySelector(".js-modal-stop").removeEventListener("click", stopPropagation)
     modal = null
 }
+=======
+let modal = null
+
+//ouverture de la modale
+const openModal = function (e) {
+    e.preventDefault()
+    const target = document.querySelector(e.target.getAttribute("href"))
+    target.style.display = null
+    target.removeAttribute("aria-hidden")
+    target.setAttribute("aria-modal", "true")
+    modal = target
+    document.querySelector(".imagesProjets").innerHTML = ""
+    genererImages(projets)
+}
+export { openModal };
+
+//fermeture de la modale
+const closeModal = function (e) {
+    e.preventDefault();
+    modal.style.display = "none";
+    modal.setAttribute("aria-hidden", "true");
+    modal.removeAttribute("aria-modal");
+    modal.removeEventListener("click", closeModal);
+    modal = null;
+}
+export { closeModal };
+>>>>>>> fd3063f1963e8191b4d62c103306a6979ddef4ea
 
 //cliquer à l'intérieur de la modale ne la ferme pas
 const stopPropagation = function (e) {
     e.stopPropagation()
 }
 
+<<<<<<< HEAD
 const back = (previousModalHtml) => {
     closeModal();
     // Open previous modal
@@ -116,6 +145,17 @@ const openModal = (currentHtml, previousHtml) => {
     // Add back button and listener if necessary
     // Add buttons to the modal
 }
+=======
+// Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
+window.addEventListener("click", (e) => {
+    const modale = document.querySelector(".modal");
+    if (modale && !modale.contains(e.target)) {
+        closeModal();
+    }
+});
+
+
+>>>>>>> fd3063f1963e8191b4d62c103306a6979ddef4ea
 
 //Génération des images des projets dans la modale
 const genererImages = function (images) {
@@ -139,6 +179,7 @@ const genererImages = function (images) {
         figureImage.appendChild(imageMiniature)
         figureImage.appendChild(boutonSuppression)
 
+<<<<<<< HEAD
         //suppression des projets
         boutonSuppression.addEventListener("click", () => {
             const url = `http://localhost:5678/api/works/${image.id}`
@@ -166,3 +207,37 @@ boutonModifier.addEventListener("click", () => {
 })
 
 // openModal(formModal(), modalProjets());
+=======
+        // suppressionProjet(projets)
+        const url = `http://localhost:5678/api/works/${image.id}`
+        boutonSuppression.addEventListener("click", () => {
+                fetch(url, {
+                    method: "DELETE",
+                    headers: { "Authorization": `Bearer ${token}` },
+                })
+
+                //suppression du projet correspondant dans la zone "mes projets"
+                .then(data => {
+                    data.id = image.id
+                    figureImage.remove()
+                    document.getElementById("projet_" + data.id).remove()
+                })
+
+        })
+
+    }
+}
+export { genererImages };
+
+// appel des fonctions de la modale
+
+//ouverture de la modale des projets
+document.getElementById("js-modal_1").addEventListener("click", openModal)
+
+//fermeture de la modale des projets quand on clique sur la croix
+document.querySelector(".js-modal-close").addEventListener("click", closeModal)
+
+//ouverture de la modale du formulaire
+document.getElementById("ajouterPhoto").addEventListener("click",openModal)
+
+>>>>>>> fd3063f1963e8191b4d62c103306a6979ddef4ea

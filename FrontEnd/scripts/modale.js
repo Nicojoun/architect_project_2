@@ -44,7 +44,7 @@ const stopPropagation = function (e) {
 // window.addEventListener("click", (e) => {
 //     const modale = document.querySelector(".modal");
 //     if (modale && !modale.contains(e.target)) {
-//         closeModal();
+//         closeModal("modal1");
 //     }
 // });
 

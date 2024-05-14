@@ -81,9 +81,9 @@ body, html {
 	font-family: 'Work Sans' ;
 }
 
-.js-modal-close {
-	display: flex;
-	justify-content: end;
+.fermerProjets {
+	position: relative;
+	left: 580px;
 }
 
 #titlemodal {
@@ -137,6 +137,11 @@ body, html {
 }
 
 /* modale formulaire */
+
+#fermerRetour {
+	display: flex;
+	justify-content: space-between;
+}
 
 .fermerFormulaire {
 	position: relative;

@@ -115,6 +115,8 @@ document.getElementById("ajouterPhoto").addEventListener("click", (e) => {
 })
 
 //ouverture de la modale du formulaire
-document.getElementById("js-modal_1").addEventListener("click", (e) => {
-    openModal(e)
-})
+if (token !== null) {
+    document.getElementById("js-modal_1").addEventListener("click", (e) => {
+        openModal(e)
+    }
+)}

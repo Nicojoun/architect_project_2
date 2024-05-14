@@ -42,8 +42,7 @@ const closeModal = function (modaleCiblee) {
 export { closeModal };
 
 // fermer la modale lorsque l'utilisateur clique à l'extérieur
-const exterieurModale = function (e) {
-        
+const exterieurModale = function (e) {      
         if (modale.style.cssText !== "none")  {
     
             if ( (e.target !== modifierProjets) && ((e.target === modale1) || (e.target === modaleForm)) ) {
@@ -52,7 +51,6 @@ const exterieurModale = function (e) {
             }
     
         }
-
 }
 
 //Génération des images des projets dans la modale

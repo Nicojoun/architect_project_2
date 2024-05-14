@@ -143,6 +143,13 @@ body, html {
 	bottom: 3px;
 }
  
+#titreModaleFormulaire {
+	font-family: 'Work Sans' ;
+	color: #000;
+	display: flex;
+	align-items: center;
+}
+
 .formPhoto {
 	display: flex;
 	flex-direction: column;

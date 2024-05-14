@@ -46,7 +46,7 @@ const exterieurModale = function (e) {
         
         if (modale.style.cssText !== "none")  {
     
-            if ( (e.target !== modifierProjets) && (e.target === modale) ) {
+            if ( (e.target !== modifierProjets) && ((e.target === modale1) || (e.target === modaleForm)) ) {
                 closeModal("#modalForm")
                 closeModal("#modal1")
             }

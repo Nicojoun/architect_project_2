@@ -147,15 +147,11 @@ flecheRetour.addEventListener("click", (e) => {
     retourModale(e)
 })
 
-// //fermeture de la modale quand on clique sur la croix
-// document.querySelector(".fermerFormulaire").addEventListener("click", closeModal)
-
 //fermeture de la modale quand on clique sur la croix
 document.querySelector(".fermerFormulaire").addEventListener("click",() => {
     closeModal("#modalForm")
     closeModal("#modal1")
 })
-
 
 //affichage de l'image choisie
 imageUploads.addEventListener("input",(event) => {

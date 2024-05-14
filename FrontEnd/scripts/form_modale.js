@@ -30,7 +30,7 @@ const envoyerPhoto = document.getElementById("envoyerPhoto")
 
 // Gestion de la flèche retour
 const retourModale = async function(e) {
-    closeModal("modalForm")
+    closeModal("#modalForm")
     openModal(e)
     imagesProjets.innerHTML = ""
     const reponse_2 = await fetch('http://localhost:5678/api/works');
@@ -152,8 +152,8 @@ flecheRetour.addEventListener("click", (e) => {
 
 //fermeture de la modale quand on clique sur la croix
 document.querySelector(".fermerFormulaire").addEventListener("click",() => {
-    closeModal("modalForm")
-    closeModal("modal1")
+    closeModal("#modalForm")
+    closeModal("#modal1")
 })
 
 

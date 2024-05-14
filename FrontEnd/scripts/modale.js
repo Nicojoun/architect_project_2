@@ -9,6 +9,12 @@ const categories = await reponseCategories.json();
 //récupération du token
 let token = window.localStorage.getItem("token")
 
+//récupération des éléments
+const modale = document.querySelector(".modal");
+const modifierProjets = document.getElementById("js-modal_1")
+const modale1 = document.getElementById("modal1")
+const modaleForm = document.getElementById("modalForm")
+
 let modal = null
 
 //ouverture de la modale
@@ -26,7 +32,7 @@ export { openModal };
  
 //fermeture de la modale
 const closeModal = function (modaleCiblee) {
-    let modal = document.getElementById(modaleCiblee)
+    let modal = document.querySelector(modaleCiblee)
     modal.style.display = "none";
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
@@ -35,20 +41,19 @@ const closeModal = function (modaleCiblee) {
 }
 export { closeModal };
 
-//cliquer à l'intérieur de la modale ne la ferme pas
-const stopPropagation = function (e) {
-    e.stopPropagation()
+// fermer la modale lorsque l'utilisateur clique à l'extérieur
+const exterieurModale = function (e) {
+        
+        if (modale.style.cssText !== "none")  {
+    
+            if ( (e.target !== modifierProjets) && (e.target === modale) ) {
+                closeModal("#modalForm")
+                closeModal("#modal1")
+            }
+    
+        }
+
 }
-
-// Ajout de l'écouteur d'événement pour fermer la modale lorsque l'utilisateur clique à l'extérieur
-window.addEventListener("click", (e) => {
-    const modale = document.querySelector(".modal");
-    if (modale && !modale.contains(e.target)) {
-        closeModal("modal1");
-    }
-});
-
-
 
 //Génération des images des projets dans la modale
 const genererImages = function (images) {
@@ -96,9 +101,14 @@ export { genererImages };
 // appel des fonctions de la modale
 
 
+//fermeture de la modale quand on clique à l'extérieur
+window.addEventListener("click", (e) => {
+    exterieurModale(e)
+})
+
 //fermeture de la modale quand on clique sur la croix
 document.querySelector(".js-modal-close").addEventListener("click", () =>{
-    closeModal("modal1")
+    closeModal("#modal1")
 })
 
 // //ouverture de la modale des projets

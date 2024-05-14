@@ -8,10 +8,13 @@ const categories = await reponseCategories.json();
 
 //récupération du token
 let token = window.localStorage.getItem("token")
- 
+
+//récupération des éléments
 const loginLogout = document.getElementById("loginLogout")
 const mesProjets = document.querySelector("#portfolio h2")
 const edition = document.querySelector(".edition")
+const filtre = document.querySelector(".filtre")
+const boutonTous = document.getElementById("tous")
 
 //modification de la page si la connection est réussie
 if (token !== null) {
@@ -53,34 +56,49 @@ const genererProjets = function (projets) {
 //affichage des filtres
 const genererFiltres = function (categories) {     
     for  (const categorie of categories) {
-        // Récupération de l'élément du DOM qui accueillera les filtres
-        const filtre = document.querySelector(".filtre")
-
         // Création d’un bouton dédié à un filtre
         const boutonFiltre = document.createElement("button")
         boutonFiltre.innerText = categorie.name
         boutonFiltre.value = categorie.id
-        boutonFiltre.className = "boutonsFiltres"   
+        boutonFiltre.className = "boutonsFiltres"
+        boutonFiltre.id = "boutonCategorie" + categorie.id   
 
         filtre.appendChild(boutonFiltre)
 
+        boutonTous.classList.add("boutonClasseCiblee")
+
         // Tri des projets lorsqu'on clique sur les boutons des filtres
-        boutonFiltre.addEventListener("click", () => {
+        boutonFiltre.addEventListener("click", (e) => {
+            // Supprime la classe "boutonClasseCiblee" de tous les boutons de filtre
+            document.querySelectorAll('.boutonsFiltres').forEach(button => {
+                button.classList.remove('boutonClasseCiblee');
+            });
+
+            // Ajoute la classe "boutonClasseCiblee" au bouton sur lequel on a cliqué
+            e.target.classList.add('boutonClasseCiblee');
+
             const categoriesFiltrees = projets.filter(function (projet) {
                 return projet.category.name === boutonFiltre.innerText
             })
+
             document.querySelector(".gallery").innerHTML = ""
             genererProjets(categoriesFiltrees)
             
         })
-}
-    //Réinitilisation des filtres et affichage de tous les projets
-    const boutonTous = document.getElementById("tous")
+    }
+
+    //Réinitialisation des filtres et affichage de tous les projets
     boutonTous.addEventListener("click", () => {
+        // Supprime la classe "boutonClasseCiblee" de tous les boutons de filtre
+        document.querySelectorAll('.boutonsFiltres').forEach(button => {
+            button.classList.remove('boutonClasseCiblee');
+        });
+        boutonTous.classList.add("boutonClasseCiblee")
         document.querySelector(".gallery").innerHTML = ""
         genererProjets(projets)
     })
 }
+
 
 //appel des fonctions
 genererProjets(projets)

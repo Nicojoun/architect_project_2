@@ -288,7 +288,8 @@ nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	gap: 30px;
+	font-family: 'Work Sans';
 }
 
 nav li {
@@ -307,6 +308,10 @@ nav li a {
 
 nav li a:hover {
 	color: #B1663C;
+}
+
+nav img {
+	width: 22px;
 }
 
 #introduction {

@@ -26,7 +26,7 @@ if (token !== null) {
     }) 
 
     const modifierProjet = document.createElement("div")
-    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="js-modal_1" class="js-modal">Modifier</a>`
+    modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="js-modal_1" class="js-modal">modifier</a>`
     mesProjets.appendChild(modifierProjet)
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
 } 

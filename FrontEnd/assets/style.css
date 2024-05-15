@@ -358,6 +358,12 @@ nav img {
 	gap: 10px;
 }
 
+#js-modal_1 {
+	text-decoration: none;
+	color: #000;
+	line-height: 16.42px;
+}
+
 .filtre {
 	display: flex;
 	justify-content: center;

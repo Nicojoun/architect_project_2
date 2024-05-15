@@ -15,6 +15,7 @@ const mesProjets = document.querySelector("#portfolio h2")
 const edition = document.querySelector(".edition")
 const filtre = document.querySelector(".filtre")
 const boutonTous = document.getElementById("tous")
+const formContact = document.querySelector("#contact form")
 
 //modification de la page si la connection est réussie
 if (token !== null) {
@@ -103,6 +104,11 @@ const genererFiltres = function (categories) {
 //appel des fonctions
 genererProjets(projets)
 genererFiltres(categories)
+
+//suppression du comportement par défault du formulaire de contact
+formContact.addEventListener("submit", (e) => {
+    e.preventDefault()
+})
 
 
 

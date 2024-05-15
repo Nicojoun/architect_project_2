@@ -317,6 +317,8 @@ nav img {
 #introduction {
 	display: flex;
 	align-items: center;
+	margin-top: 150px;
+	margin-bottom: 150px;
 }
 #introduction figure {
 	flex: 1

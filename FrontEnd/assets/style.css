@@ -405,20 +405,33 @@ margin: auto;
 	margin-top:30px;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
 }
 
 #contact input, #connexion input {
-	height: 50px;
-	font-size: 1.2em;
+	font-size: 14px;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
 }
 #contact label, #connexion label {
-	margin: 2em 0 1em 0;
+	margin: 2em 0% 1em 0;
+	width: 67%;
 }
 #contact textarea, #connexion textarea {
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	width: 379px;
+	height: 174px;
+}
+
+.formInput {
+	width: 379px;
+	height: 51px;
+}
+
+.formSubmit {
+	width: 180px;
+	height: 36px;
 }
 
 #connexion a {
@@ -432,7 +445,6 @@ input[type="submit"]{
 	color: white;
 	background-color: #1D6154;
 	margin : 2em auto ;
-	width: 180px;
 	text-align: center;
 	border-radius: 60px ;
 }
@@ -444,10 +456,6 @@ footer nav ul {
 }
 
 #footerLogin {
-	/* display: flex;
-	flex: 1;
-	flex-direction: column;
-	justify-content: flex-end; */
 	margin-top: 30%;
 }
 

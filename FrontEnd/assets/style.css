@@ -150,7 +150,8 @@ body, html {
 #fermerRetour {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 20px;
+	position: relative;
+	top: 20px;
 }
 
 .fermerFormulaire {
@@ -166,12 +167,16 @@ body, html {
 	color: #000;
 	display: flex;
 	align-items: center;
+	position: relative;
+	top: 40px;
 }
 
 .formPhoto {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	position: relative;
+	top: 40px;
 	font-family: 'Work Sans' ;
 	border-bottom: 1px solid #B3B3B3
 }
@@ -227,6 +232,7 @@ body, html {
 	height: 51px;
 	box-shadow: 0px 4px 14px 0px #00000017;
 	border: none;
+	margin-bottom: -50px;
 }
 
 .formPhoto input {
@@ -243,6 +249,8 @@ body, html {
 	padding: 5px 60px;
 	height: 35px;
 	background-color: #A7A7A7;
+	width: 237px;
+	font-family: 'Syne';
 }
 
 /* fenetre modale fin */

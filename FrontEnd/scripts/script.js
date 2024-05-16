@@ -101,10 +101,19 @@ const genererFiltres = function (categories) {
     })
 }
 
+if (token !== null) {
+    boutonTous.style.opacity = 0
+}
+
 
 //appel des fonctions
 genererProjets(projets)
-genererFiltres(categories)
+
+
+if (token === null) {
+    genererFiltres(categories)
+}
+
 
 //suppression du comportement par défault du formulaire de contact
 formContact.addEventListener("submit", (e) => {

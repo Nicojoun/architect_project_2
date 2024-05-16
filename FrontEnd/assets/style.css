@@ -115,6 +115,9 @@ body, html {
 
 .content {
 	border-bottom: 1px solid #B3B3B3 ;
+	width: 450px;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .imagesProjets {
@@ -123,6 +126,8 @@ body, html {
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 10px;
 	grid-row-gap: 30px;	
+	position: relative;
+	right: 48px;
 }
 
 .imagesProjets figure {
@@ -178,7 +183,10 @@ body, html {
 	position: relative;
 	top: 40px;
 	font-family: 'Work Sans' ;
-	border-bottom: 1px solid #B3B3B3
+	border-bottom: 1px solid #B3B3B3;
+	width: 420px;
+	position: relative;
+	left: 75px;
 }
 
 .formPhoto div {

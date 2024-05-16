@@ -270,6 +270,7 @@ body {
 	color: white;
 	font-family: 'Work Sans' ;
 	padding: 20px 20px;
+	opacity: 0;
 }
 
 header {

@@ -29,6 +29,7 @@ if (token !== null) {
     modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="js-modal_1" class="js-modal">modifier</a>`
     mesProjets.appendChild(modifierProjet)
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
+    edition.style.opacity = "1"
 } 
 
 const genererProjets = function (projets) {     

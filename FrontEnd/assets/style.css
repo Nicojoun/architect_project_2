@@ -278,7 +278,7 @@ body {
 	color: white;
 	font-family: 'Work Sans' ;
 	padding: 20px 20px;
-	opacity: 0;
+	display: none;
 }
 
 header {
@@ -324,6 +324,10 @@ nav ul {
 nav li {
 	padding: 0 10px;
 	font-size: 1.2em;
+}
+
+#liLogin {
+	font-weight: 600;
 }
 
 li:hover {

@@ -28,9 +28,11 @@ if (token !== null) {
     const modifierProjet = document.createElement("div")
     modifierProjet.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <a href="#modal1" id="js-modal_1" class="js-modal">modifier</a>`
     mesProjets.appendChild(modifierProjet)
+
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
     edition.style.display = "flex"
     edition.style.marginBottom = "50px"
+    
     boutonTous.style.display = "none"
     document.querySelector("#portfolio h2").style.marginBottom = "80px"
 } 
@@ -117,7 +119,6 @@ if (token === null) {
 formContact.addEventListener("submit", (e) => {
     e.preventDefault()
 })
-
 
 
 

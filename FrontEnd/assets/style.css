@@ -375,7 +375,6 @@ nav img {
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
-	/* height: 192px; */
 }
 
 #introduction p {
@@ -383,7 +382,6 @@ nav img {
 	width: 404px;
 }
 #portfolio h2 {
-	/* text-align: center; */
 	margin-bottom: 1em;
 	display: flex;
 	justify-content: center;

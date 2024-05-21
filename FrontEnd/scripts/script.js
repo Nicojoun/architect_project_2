@@ -31,6 +31,8 @@ if (token !== null) {
     edition.innerHTML = `<i class="fa-regular fa-pen-to-square"></i> <p>Mode édition</p>`
     edition.style.display = "flex"
     edition.style.marginBottom = "50px"
+    boutonTous.style.display = "none"
+    document.querySelector("#portfolio h2").style.marginBottom = "80px"
 } 
 
 const genererProjets = function (projets) {     
@@ -101,11 +103,6 @@ const genererFiltres = function (categories) {
         genererProjets(projets)
     })
 }
-
-if (token !== null) {
-    boutonTous.style.display = "none"
-}
-
 
 //appel des fonctions
 genererProjets(projets)

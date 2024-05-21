@@ -103,7 +103,7 @@ const genererFiltres = function (categories) {
 }
 
 if (token !== null) {
-    boutonTous.style.opacity = 0
+    boutonTous.style.display = "none"
 }
 
 

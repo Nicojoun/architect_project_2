@@ -330,6 +330,10 @@ nav li {
 	font-size: 1.2em;
 }
 
+.headerProjet {
+	margin-top: 50px;
+}
+
 #liLogin {
 	font-weight: 600;
 }

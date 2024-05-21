@@ -2,8 +2,7 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-
-html, body, div, span, applet, object, iframe,
+span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -48,11 +47,17 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+.marginZero {
+	margin: 0;
+	max-width: 1140px;
+	margin: auto;
+}
+
 /** end reset css**/
 
 /* fenetre modale début */
 body, html {
-    margin: 0;
     padding: 0;
 }
 
@@ -264,7 +269,6 @@ body, html {
 /* fenetre modale fin */
 
 body {
-	max-width: 1140px;
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
@@ -432,7 +436,7 @@ nav img {
 }
 #contact, #connexion {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > *,  #connexion > * {
 	text-align: center;

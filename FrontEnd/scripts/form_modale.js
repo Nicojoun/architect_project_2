@@ -88,6 +88,10 @@ const updateButtonColor = () => {
     }
 }
 
+formPhoto.addEventListener("submit", (event) => {
+    event.preventDefault()
+})
+
 const erreurFormulaire = function() {
     errorMessage.innerText = "Veuillez remplir tous les champs pour continuer." // Afficher le message d'erreur
 }

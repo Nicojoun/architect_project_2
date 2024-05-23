@@ -1,5 +1,6 @@
 //importation des fonctions
-import { genererImages, openModal, closeModal } from './modale.js';
+import { genererImages, openModal, closeModal } from './modale.js';         
+import { genererProjets } from './script.js';  
 
  
 // Récupération des projets de l’architecte depuis l'API
@@ -14,6 +15,7 @@ const categories = await reponseCategories.json();
 let token = window.localStorage.getItem("token")
 
 //récupération des éléments
+const gallery = document.querySelector(".gallery")
 const modalWrapper = document.querySelector(".modal-wrapper")
 const imagesProjets = document.querySelector(".imagesProjets") 
 const flecheRetour = document.getElementById("flecheRetour")
@@ -32,10 +34,6 @@ const envoyerPhoto = document.getElementById("envoyerPhoto")
 const retourModale = async function(e) {
     closeModal("#modalForm")
     openModal(e)
-    imagesProjets.innerHTML = ""
-    const reponse_2 = await fetch('http://localhost:5678/api/works');
-    const projets_2 = await reponse_2.json();
-    genererImages(projets_2)
 }
 
 //affichage de l'image choisie dans le formaulaire de la modale
@@ -81,7 +79,7 @@ const updateButtonColor = () => {
     if (titreValue && categorieValue && file) {
         envoyerPhoto.style.backgroundColor = "#1D6154"
         envoyerPhoto.removeEventListener("click", erreurFormulaire)
-        formPhoto.addEventListener("submit", validerFormulaire)
+        envoyerPhoto.addEventListener("click", validerFormulaire)
         errorMessage.innerText = "" // Effacer le message d'erreur
     } else {
         envoyerPhoto.style.backgroundColor = ""
@@ -110,20 +108,20 @@ const validerFormulaire = async function(event) {
 
         if (response.ok) {
             console.log("Données envoyées avec succès !")
+            const reponse_3 = await fetch('http://localhost:5678/api/works');
+            const projets_3 = await reponse_3.json();
 
-            // Récupérer les données du nouveau projet depuis la réponse
-            const nouveauProjet = await response.json()
+            //génération images dans zone mes projets
+            gallery.innerHTML = ""
+            genererProjets(projets_3)
 
-            // Générer et ajouter le nouvel élément HTML pour la zone "mes projet"
-            const gallery = document.querySelector(".gallery")
-            const figureProjet = document.createElement("figure")
-
-            figureProjet.innerHTML = `  <img src="${nouveauProjet.imageUrl}" 
-                                            alt="${nouveauProjet.title}">
-                                        </img>
-                                        <figcaption>${nouveauProjet.title}</figcaption>
-            `
-            gallery.append(figureProjet)
+            //génération images dans modale projets
+            imagesProjets.innerHTML = ""
+            genererImages(projets_3)
+            
+            closeModal("#modalForm")
+            closeModal("#modal1")
+            
             
         } else {
             console.error("Erreur lors de l'envoi des données :", response.status)

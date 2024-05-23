@@ -59,6 +59,7 @@ const genererProjets = function (projets) {
         figureProjet.appendChild(titreProjet)
     }
 }
+export { genererProjets };
 
 //affichage des filtres
 const genererFiltres = function (categories) {     

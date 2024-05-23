@@ -18,7 +18,7 @@ const modaleForm = document.getElementById("modalForm")
 let modal = null
 
 //ouverture de la modale
-const openModal = function (e) {
+const openModal = async function (e) {
     e.preventDefault()
     const target = document.querySelector(e.target.getAttribute("href"))
     target.style.display = null
@@ -26,7 +26,9 @@ const openModal = function (e) {
     target.setAttribute("aria-modal", "true")
     modal = target
     document.querySelector(".imagesProjets").innerHTML = ""
-    genererImages(projets)
+    const reponse_2 = await fetch('http://localhost:5678/api/works');
+    const projets_2 = await reponse_2.json();
+    genererImages(projets_2)
 }
 export { openModal };
  

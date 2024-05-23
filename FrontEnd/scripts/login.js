@@ -30,6 +30,7 @@ formulaireConnexion.addEventListener("submit", async (event) => {
         formulaireConnexion.appendChild(spanMessageErreur)
         const messageErreur = document.createElement("p")
         messageErreur.innerText = "Erreur dans l’identifiant ou le mot de passe"
+        messageErreur.style.color = "red"
         spanMessageErreur.appendChild(messageErreur)
     }  
         
